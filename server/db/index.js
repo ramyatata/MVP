@@ -1,110 +1,88 @@
+const colors = require('colors');
 const sql = require('mysql2');
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('RestaurantBuddy', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
   operatorsAliases: false
-  });
+});
 
 sequelize
   .authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
   })
-  .catch(err => {
+  .catch((err) => {
     console.error('Unable to connect to the database:', err);
-  });
-
-const User = sequelize.define('user', {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  userName:  {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  email:  {
-    type: Sequelize.STRING,
-    unique: true,
-    allowNull: false
-  },
-  password:  {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
 });
 
-const Restaurant = sequelize.define('restaurant', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
-  street: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  city: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  state:  {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  zipcode:  {
-    type: Sequelize.INTEGER,
-    unique: true,
-    allowNull: false
-  },
-  cusine:  {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  rating: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  price:  {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  items:  {
-    type: Sequelize.INTEGER,
-    unique: true,
-    allowNull: false
-  },
-  image:  {
-    type: Sequelize.BLOB
-  }
-});
+const users = require('../models/users')(sequelize, Sequelize);
+const restaurants = require('../models/restaurants')(sequelize, Sequelize);
+const favourites = require('../models/favourites')(sequelize, Sequelize);
+const friends = require('../models/friends')(sequelize, Sequelize);
+
+users.sync();
+restaurants.sync();
+favourites.sync();
+friends.sync();
 
 
-User.sync({force: true}).then(()=>{
-  return User.create({
-    firstName: 'Ramya',
-    lastName: 'Test',
-    userName: 'rtest',
-    email: 'rtest@gmail.com',
-    password: 'ramya'
-  });
-});
+//associations
+//one user can review many restaurants USERS <=> RESTAURANTS
+users.hasMany(restaurants, {foreignkey: 'userId'});
+restaurants.belongsTo(users);
+//one user can have many favourites USERS <=> FAVOURITES
+users.hasMany(favourites, {foreignkey: 'userId'});
+favourites.belongsTo(users);
+//one restaurant can be many favourites. RESTAURANTS <=> FAVOURITES
+restaurants.hasMany(favourites, {foreignkey: 'restaurantId'});
+favourites.belongsTo(restaurants);
+//one user can have many user ids in friends, one user can have many friends
+users.hasMany(friends, {foreignkey: 'friendId'});
+friends.belongsTo(users);
+//friends.belongsTo(users, {as: 'friendInFriend', foreignkey: 'friendId'});
+users.hasMany(friends, {foreignkey: 'userId'});
+//friends.belongsTo(users, {as: 'userInFriend', foreignkey: 'userId'});
 
-Restaurant.sync();
+var db = {};
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+db.users = users;
+db.restaurants = restaurants;
+db.favourites = favourites;
+db.friends = friends;
 
-exports.user = User;
+module.exports = db;
+
+
+
+
+
+
+
+//////////////////////////////. COMMENTED FOR FUTURE USE ////////////////////////
+
+// users.sync({force: true}).then(() => {
+//   return users.create({
+//     firstName: 'ramki',
+//     lastName: 'Test',
+//     userName: 'rtest',
+//     email: 'rtest@gmail.com',
+//     password: 'ramya'
+//   });
+// });
+// restaurants.sync({force:true})
+// .then(() => {
+//   return restaurants.create({
+//     userId: 1,
+//     name: 'Chick Fila',
+//     street: '1303 campbell',
+//     city: 'Houston',
+//     state: 'TX',
+//     zipcode: '77081',
+//     rating: 3,
+//     price: '$$',
+//     item: 'burger',
+//     cusine: 'American'
+//   });
+// });

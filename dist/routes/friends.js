@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var db = require('./db/index.js');
+var db = require('../db/index.js');
 var colors = require('colors');
 
 router.get('/', function (req, res, next) {
