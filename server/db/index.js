@@ -21,10 +21,10 @@ const restaurants = require('../models/restaurants')(sequelize, Sequelize);
 const favourites = require('../models/favourites')(sequelize, Sequelize);
 const friends = require('../models/friends')(sequelize, Sequelize);
 
-users.sync();
-restaurants.sync();
-favourites.sync();
-friends.sync();
+// users.sync();
+// restaurants.sync();
+// favourites.sync();
+// friends.sync();
 
 
 //associations
