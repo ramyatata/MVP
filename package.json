@@ -17,6 +17,9 @@
     "mysql": "^2.15.0",
     "mysql2": "^1.4.2",
     "nodemon": "^1.12.1",
+    "path": "^0.12.7",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "sequelize": "^4.15.0"
   },
   "devDependencies": {

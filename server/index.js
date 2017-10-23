@@ -3,6 +3,7 @@ const app = express();
 const colors = require('colors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 //routes
 const usersRoute = require('./routes/users');
@@ -15,6 +16,12 @@ const port = process.env.PORT || 8088;
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin': '*');
+  res.setHeader('Access-Control-Allow-Methods': 'POST, GET, DELETE, PUT, OPTIONS');
+});
+console.log(colors.blue(__dirname));
+app.use(express.static(path.join(__dirname, '/client')));
 app.use('/users', usersRoute);
 app.use('/favourites', favouritesRoute);
 app.use('/friends', friendsRoute);
