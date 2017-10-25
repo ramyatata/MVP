@@ -22,7 +22,7 @@ const favourites = require('../models/favourites')(sequelize, Sequelize);
 const friends = require('../models/friends')(sequelize, Sequelize);
 
 // users.sync();
-// restaurants.sync();
+ //restaurants.sync();
 // favourites.sync();
 // friends.sync();
 

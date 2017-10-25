@@ -8,23 +8,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RestaurantList = function (_React$Component) {
-    _inherits(RestaurantList, _React$Component);
+var FriendList = function (_React$Component) {
+    _inherits(FriendList, _React$Component);
 
-    function RestaurantList(props) {
-        _classCallCheck(this, RestaurantList);
+    function FriendList(props) {
+        _classCallCheck(this, FriendList);
 
-        var _this = _possibleConstructorReturn(this, (RestaurantList.__proto__ || Object.getPrototypeOf(RestaurantList)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).call(this, props));
 
         _this.state = {};
         return _this;
     }
 
-    _createClass(RestaurantList, [{
+    _createClass(FriendList, [{
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
             var listStyle = {
                 'listStyle': 'none'
             };
@@ -33,7 +31,7 @@ var RestaurantList = function (_React$Component) {
                 return React.createElement(
                     'li',
                     { key: ind },
-                    React.createElement(RestaurantEntry, { data: item, showRestaurantDetails: _this2.props.showRestaurantDetails })
+                    React.createElement(FriendEntry, { data: item })
                 );
             });
 
@@ -49,7 +47,7 @@ var RestaurantList = function (_React$Component) {
         }
     }]);
 
-    return RestaurantList;
+    return FriendList;
 }(React.Component);
 
-window.RestaurantList = RestaurantList;
+window.FriendList = FriendList;

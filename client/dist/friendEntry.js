@@ -8,48 +8,62 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RestaurantList = function (_React$Component) {
-    _inherits(RestaurantList, _React$Component);
+var FriendEntry = function (_React$Component) {
+    _inherits(FriendEntry, _React$Component);
 
-    function RestaurantList(props) {
-        _classCallCheck(this, RestaurantList);
+    function FriendEntry(props) {
+        _classCallCheck(this, FriendEntry);
 
-        var _this = _possibleConstructorReturn(this, (RestaurantList.__proto__ || Object.getPrototypeOf(RestaurantList)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (FriendEntry.__proto__ || Object.getPrototypeOf(FriendEntry)).call(this, props));
 
         _this.state = {};
         return _this;
     }
 
-    _createClass(RestaurantList, [{
+    _createClass(FriendEntry, [{
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
-            var listStyle = {
-                'listStyle': 'none'
-            };
-
-            var entries = this.props.data.map(function (item, ind) {
-                return React.createElement(
-                    'li',
-                    { key: ind },
-                    React.createElement(RestaurantEntry, { data: item, showRestaurantDetails: _this2.props.showRestaurantDetails })
-                );
-            });
-
             return React.createElement(
                 'div',
                 null,
                 React.createElement(
-                    'ul',
-                    { style: listStyle },
-                    entries
+                    'div',
+                    { className: 'row col-xs-3' },
+                    React.createElement(
+                        'h3',
+                        null,
+                        React.createElement(
+                            'span',
+                            null,
+                            this.props.firstName
+                        ),
+                        '\xA0',
+                        React.createElement(
+                            'span',
+                            null,
+                            this.props.lastName
+                        )
+                    ),
+                    React.createElement(
+                        'h4',
+                        null,
+                        this.props.userName
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'col-xs-2' },
+                    React.createElement(
+                        'button',
+                        { type: 'button', className: 'btn btn-success btn-circle' },
+                        React.createElement('i', { className: 'glyphicon glyphicon-link' })
+                    )
                 )
             );
         }
     }]);
 
-    return RestaurantList;
+    return FriendEntry;
 }(React.Component);
 
-window.RestaurantList = RestaurantList;
+window.FriendEntry = FriendEntry;

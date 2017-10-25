@@ -1,4 +1,4 @@
-class RestaurantList extends React.Component {
+class FriendList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -8,7 +8,7 @@ class RestaurantList extends React.Component {
           'listStyle': 'none'
         };
 
-        var entries = this.props.data.map((item, ind) => <li key={ind}><RestaurantEntry data={item} showRestaurantDetails={this.props.showRestaurantDetails}/></li>);
+        var entries = this.props.data.map((item, ind) => <li key={ind}><FriendEntry data={item}/></li>);
 
         return (
             <div>
@@ -20,4 +20,4 @@ class RestaurantList extends React.Component {
     }
 }
 
-window.RestaurantList = RestaurantList;
+window.FriendList = FriendList;

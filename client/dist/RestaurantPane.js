@@ -11,10 +11,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var RestaurantPane = function (_React$Component) {
   _inherits(RestaurantPane, _React$Component);
 
-  function RestaurantPane() {
+  function RestaurantPane(props) {
     _classCallCheck(this, RestaurantPane);
 
-    return _possibleConstructorReturn(this, (RestaurantPane.__proto__ || Object.getPrototypeOf(RestaurantPane)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (RestaurantPane.__proto__ || Object.getPrototypeOf(RestaurantPane)).call(this, props));
+
+    _this.state = {};
+    return _this;
   }
 
   _createClass(RestaurantPane, [{
@@ -27,7 +30,8 @@ var RestaurantPane = function (_React$Component) {
           "h2",
           null,
           "List of restaurant"
-        )
+        ),
+        React.createElement(RestaurantList, { data: this.props.restaurants, showRestaurantDetails: this.props.showRestaurantDetails })
       );
     }
   }]);
