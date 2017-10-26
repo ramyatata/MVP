@@ -10,19 +10,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Search = function (_React$Component) {
-  _inherits(Search, _React$Component);
+var YelpFinder = function (_React$Component) {
+  _inherits(YelpFinder, _React$Component);
 
-  function Search(props) {
-    _classCallCheck(this, Search);
+  function YelpFinder(props) {
+    _classCallCheck(this, YelpFinder);
 
-    var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (YelpFinder.__proto__ || Object.getPrototypeOf(YelpFinder)).call(this, props));
 
     _this.state = {
       term: '',
-      location: '',
-      restaurant: '',
-      numberOfGuests: ''
+      location: ''
     };
 
     _this.handleInputChange = _this.handleInputChange.bind(_this);
@@ -30,48 +28,39 @@ var Search = function (_React$Component) {
     return _this;
   }
 
-  _createClass(Search, [{
+  _createClass(YelpFinder, [{
     key: 'handleInputChange',
     value: function handleInputChange(event) {
-      console.log(event);
-      var name = event.target.id;
-      var value = event.target.value;
-      console.log('eventName: ' + name + 'vaue: ' + value);
+      var target = event.target;
+      var value = target.value;
+      var name = target.name;
+
       this.setState(_defineProperty({}, name, value));
     }
   }, {
     key: 'handleSearch',
     value: function handleSearch(event) {
-      alert('here');
       event.preventDefault();
-      this.props.searchHandler(this.state());
+      this.props.search(this.state);
     }
   }, {
     key: 'render',
     value: function render() {
       return React.createElement(
-        'div',
+        'form',
         null,
+        React.createElement('input', { name: 'term', type: 'text', value: this.state.term, onChange: this.handleInputChange, placeholder: 'Find Restaurant ...' }),
+        React.createElement('input', { name: 'location', type: 'text', value: this.state.location, onChange: this.handleInputChange, placeholder: 'Location..' }),
         React.createElement(
-          'form',
-          null,
-          React.createElement('input', {
-            name: 'numberOfGuests',
-            type: 'number',
-            value: this.state.numberOfGuests,
-            onChange: this.handleInputChange, id: 'number' }),
-          React.createElement('input', null),
-          React.createElement(
-            'button',
-            { type: 'button' },
-            'Submit'
-          )
+          'button',
+          { type: 'button', onClick: this.handleSearch },
+          'Search'
         )
       );
     }
   }]);
 
-  return Search;
+  return YelpFinder;
 }(React.Component);
 
-window.Search = Search;
+window.YelpFinder = YelpFinder;

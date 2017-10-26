@@ -6,12 +6,13 @@ window.services = {
         type: 'POST',
         data: JSON.stringify(values),
         contentType: 'application/json',
-        dataType: 'application/json',
         success: function(results){
-          console.log(results, null);
+          console.log('Create success');
+          callback(results, null);
         },
-        failure: function(err, callback){
-          console.log(null, err);
+        error: function(err, callback){
+          console.log('create failed');
+          callback(null, err);
         }
       });
     },

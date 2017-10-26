@@ -12,29 +12,12 @@ class App extends React.Component {
       name: 'Ram'
     };
 
-    this.callServiceAddRestaurant = this.callServiceAddRestaurant.bind(this);
     this.callServiceListRestaurant = this.callServiceListRestaurant.bind(this);
-    this.callServiceAddFriend = this.callServiceAddFriend.bind(this);
-    this.callServiceListFriend = this.callServiceListFriend.bind(this);
     this.callServiceAddUser = this.callServiceAddUser.bind(this);
     this.callServiceListUser = this.callServiceListUser.bind(this);
     this.callServiceShowRestaurantDetails = this.callServiceShowRestaurantDetails.bind(this);
-    this.callServiceFetchYelpData = this.callServiceFetchYelpData.bind(this);
-
   }
   //Restaurant
-  callServiceAddRestaurant(values){
-    services.restaurants.create(values, function(newRestaurant, err){
-      if(newRestaurant){
-        this.setState({
-          'message_review': 'Restaurant is added',
-          'clear_review' : true
-        });
-      } else {
-        this.setState('message_review': err.message);
-      }
-    });
-  }
   callServiceListRestaurant(){
     var self = this;
     services.restaurants.list(function(restaurants, err){
@@ -44,31 +27,6 @@ class App extends React.Component {
         });
       } else {
         self.setState('message_review': err.message);
-      }
-    });
-  }
-
-  //Friend
-  callServiceAddFriend(values){
-    services.friends.create(values, function(newFriend, err){
-      if(newFriend){
-        this.setState({
-
-        });
-      } else {
-        this.setState('message_friend': err.message);
-      }
-    });
-  }
-  callServiceListFriend(){
-    var self = this;
-    services.friends.list(function(friends, err){
-      if(friends){
-        self.setState({
-          //'friendsList': friends
-        });
-      } else {
-        self.setState('message_friend': err.message);
       }
     });
   }
@@ -97,32 +55,11 @@ class App extends React.Component {
       }
     });
   }
-  callServiceuserNewFriendList(userId){
-    const users = [];
-    const friends = [];
-    const newFriends = [];
-    // services.users.list(function(results, err){
-    //   if(results){
-    //     users = results.filter((user) => user.id !== this.state.currentUser);
-    //     services.friends.list(function(results, err){
-    //       if(results){
-    //         newFriends = users.filter(function(user){})
-    //       } else {
-    //         self.setState('message_friend': err.message);
-    //       }
-    //     })
-    //   } else {
-    //     self.setState('message_friend': err.message);
-    //   }
-    // })
-  }
 
-  callServiceFetchYelpData(){
-    window.fetchYelpData(function(results, err){});
-  }
+
 
   callServiceShowRestaurantDetails(data){
-    this.callServiceFetchYelpData();
+    //this.callServiceFetchYelpData();
 
     let review1 = 'THiss dasasd das dasdasfrr rewwer we r ewrwer w err. ewrewrwerewrr';
     let review2 = 'THiss dasasd das dasdasfrr rewwer we r ewrwer w err. ewrewrwerewrr';
@@ -140,30 +77,11 @@ class App extends React.Component {
                "<h6>"+ review2 + "</h6>" +
                "<h6>"+ review3 + "</h6>" ;
 
-    let dialog = bootbox.dialog({
-      title: data.name,
-      message : html,
-      buttons: {
-        noclose: {
-          label: 'Favourite',
-          className: 'btn-warning',
-          callback: function(){
 
-          }
-        },
-        ok: {
-          label: 'Ok',
-          className: 'btn-info',
-          callback: function(){
-
-          }
-        }
-      }
-    });
   }
 
   componentDidMount(){
-    this.callServiceListRestaurant();
+    //this.callServiceListRestaurant();
   }
 
   render() {
