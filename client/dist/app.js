@@ -29,7 +29,6 @@ var App = function (_React$Component) {
     _this.callServiceListRestaurant = _this.callServiceListRestaurant.bind(_this);
     _this.callServiceAddUser = _this.callServiceAddUser.bind(_this);
     _this.callServiceListUser = _this.callServiceListUser.bind(_this);
-    _this.callServiceShowRestaurantDetails = _this.callServiceShowRestaurantDetails.bind(_this);
     return _this;
   }
   //Restaurant
@@ -55,11 +54,13 @@ var App = function (_React$Component) {
   }, {
     key: 'callServiceAddUser',
     value: function callServiceAddUser(values) {
+      var _this2 = this;
+
       services.users.create(values, function (newUser, err) {
         if (newUser) {
-          this.setState({});
+          _this2.setState({});
         } else {
-          this.setState('message_user');
+          _this2.setState('message_user');
         }
       });
     }
@@ -76,20 +77,9 @@ var App = function (_React$Component) {
       });
     }
   }, {
-    key: 'callServiceShowRestaurantDetails',
-    value: function callServiceShowRestaurantDetails(data) {
-      //this.callServiceFetchYelpData();
-
-      var review1 = 'THiss dasasd das dasdasfrr rewwer we r ewrwer w err. ewrewrwerewrr';
-      var review2 = 'THiss dasasd das dasdasfrr rewwer we r ewrwer w err. ewrewrwerewrr';
-      var review3 = 'THiss dasasd das dasdasfrr rewwer we r ewrwer w err. ewrewrwerewrr';
-
-      var html = "<div class='row'><div class='col-xs-6'>" + "<h5>Cuisine : " + data.cusine + "</h5>" + "<h5>Rating : " + data.rating + "</h5>" + "<h5><span>Price : " + data.price + "</span></h5></div><div class='col-xs-6'>" + "<span>" + data.street + "</span><br/><span>" + data.city + "</span><br/>" + "<span>" + data.state + "</span>&nbsp;&nbsp;&nbsp;<span>" + data.zipcode + "</span><br/>" + "</div></div><div class='col-xs-12'>" + "<p>" + data.review + "</p></div>" + "<h6>" + review1 + "</h6>" + "<h6>" + review2 + "</h6>" + "<h6>" + review3 + "</h6>";
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      //this.callServiceListRestaurant();
+      this.callServiceListRestaurant();
     }
   }, {
     key: 'render',
@@ -143,12 +133,12 @@ var App = function (_React$Component) {
           React.createElement(
             'div',
             { className: 'tab-pane', id: 'review' },
-            React.createElement(ReviewContainer, { callServiceCreate: this.callServiceAddRestaurant, message: this.state.message })
+            React.createElement(ReviewContainer, { callServiceCreate: this.callServiceAddRestaurant, message: this.state.message, listRestaurants: this.callServiceListRestaurant })
           ),
           React.createElement(
             'div',
             { className: 'tab-pane', id: 'restaurants' },
-            React.createElement(RestaurantPane, { restaurants: this.state.restaurantsList, showRestaurantDetails: this.callServiceShowRestaurantDetails })
+            React.createElement(RestaurantPane, { restaurants: this.state.restaurantsList })
           ),
           React.createElement(
             'div',

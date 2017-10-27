@@ -5,7 +5,7 @@ const colors = require('colors');
 
 //get all
 router.get('/', (req, res) => {
-  db.friends.findAll({})
+  db.friendsRelationship.findAll({})
   .then((friends) => {
     res.status(200);
     res.json(friends);
@@ -15,24 +15,18 @@ router.get('/', (req, res) => {
   })
 });
 
-//get by id
+//get by friendId
 router.get('/:id', (req, res) => {
-  const id = req.params.id;
+  // const id = req.params.id;
+  // db.friends.findById(id)
+  // .then(()=>{})
 
-  db.friends.findById(id)
-  .then((resultFriend) => {
-    res.status(200);
-    res.json(resultFriend);
-  })
-  .catch((err) => {
-    throw err;
-  })
 });
 
 //create
 router.post('/', (req, res) => {
   const body = req.body;
-  db.friends.create(body)
+  db.friendsRelationship.create(body)
   .then((newFriend) => {
     res.status(201);
     res.json(newFriend);
@@ -47,7 +41,7 @@ router.put('/:id', (req, res) => {
   const id = req.params.id;
   const updates = req.body;
 
-  db.friends.update(updates, {
+  db.friendsRelationship.update(updates, {
     where: {
       id: id
     }
@@ -65,7 +59,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
 
-  db.friends.destroy({
+  db.friendsRelationship.destroy({
     where:{
       id: id
     }

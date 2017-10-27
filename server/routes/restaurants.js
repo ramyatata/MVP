@@ -34,9 +34,9 @@ router.post('/', (req, res) => {
   const body = req.body;
 
   db.restaurants.create(body)
-  .then((newRestaurants) => {
+  .then((newRestaurant) => {
     res.status(201);
-    res.json(newRestaurants);
+    res.json(newRestaurant);
   })
   .catch((err) => {
     throw err;

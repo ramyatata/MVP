@@ -31,7 +31,7 @@ var RestaurantPane = function (_React$Component) {
           null,
           "List of restaurant"
         ),
-        React.createElement(RestaurantList, { data: this.props.restaurants, showRestaurantDetails: this.props.showRestaurantDetails })
+        React.createElement(RestaurantList, { data: this.props.restaurants })
       );
     }
   }]);

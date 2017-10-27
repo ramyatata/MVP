@@ -8,6 +8,29 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// class YelpList extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {};
+//     }
+//     render() {
+//         const listStyle = {
+//           'listStyle': 'none'
+//         };
+
+//         var entries = this.props.data.map((item, ind) => <li key={ind}><YelpEntry data={item} addReview={this.props.addReview}/></li>);
+
+//         return (
+//             <div>
+//                 <ul style={listStyle}>
+//                   {entries}
+//                 </ul>
+//             </div>
+//         )
+//     }
+// }
+
+
 var YelpList = function (_React$Component) {
     _inherits(YelpList, _React$Component);
 
@@ -25,26 +48,20 @@ var YelpList = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var listStyle = {
-                'listStyle': 'none'
+            var divStyle = {
+                marginTop: '20px',
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap'
             };
-
             var entries = this.props.data.map(function (item, ind) {
-                return React.createElement(
-                    'li',
-                    { key: ind },
-                    React.createElement(YelpEntry, { data: item, addReview: _this2.props.addReview })
-                );
+                return React.createElement(YelpEntry, { data: item, key: ind, addReview: _this2.props.addReview });
             });
 
             return React.createElement(
                 'div',
-                null,
-                React.createElement(
-                    'ul',
-                    { style: listStyle },
-                    entries
-                )
+                { className: 'col-xs-12', style: divStyle },
+                entries
             );
         }
     }]);

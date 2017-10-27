@@ -8,6 +8,41 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// class RestaurantEntry extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {};
+
+//         this.handleClick = this.handleClick.bind(this);
+//     }
+
+//     handleClick(){
+//       this.props.showRestaurantDetails(this.props.data);
+//     }
+
+//     render() {
+//         return (
+//             <div>
+//                 <div className='row col-xs-9' onClick={this.handleClick}>
+//                     <div className='col-xs-6'>
+//                         <h4>{this.props.data.name}</h4>
+//                         <h5>Rating : {this.props.data.rating}</h5>
+//                         <h5><span>Price: {this.props.data.price}</span>&nbsp;&nbsp;&nbsp;<span>Cuisine: {this.props.data.cusine}</span></h5>
+//                     </div>
+//                     <div className='col-xs-6'>
+//                         <span>{this.props.data.street}</span><br/>
+//                         <span>{this.props.data.city}</span><br/>
+//                         <span>{this.props.data.state}</span>&nbsp;&nbsp;&nbsp;<span>{this.props.data.zipcode}</span><br/>
+//                     </div>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
+
+// window.RestaurantEntry = RestaurantEntry;
+
+
 var RestaurantEntry = function (_React$Component) {
     _inherits(RestaurantEntry, _React$Component);
 
@@ -17,84 +52,203 @@ var RestaurantEntry = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (RestaurantEntry.__proto__ || Object.getPrototypeOf(RestaurantEntry)).call(this, props));
 
         _this.state = {};
-
-        _this.handleClick = _this.handleClick.bind(_this);
         return _this;
     }
 
     _createClass(RestaurantEntry, [{
-        key: 'handleClick',
-        value: function handleClick() {
-            this.props.showRestaurantDetails(this.props.data);
-        }
-    }, {
         key: 'render',
         value: function render() {
+
+            var outerDivStyle = {
+                marginTop: '10px',
+                paddingTop: '5px',
+                paddingBottom: '5px',
+                paddingLeft: '5px',
+                border: '2px solid #E0E0E0'
+            };
+            var contentStyle = {
+                padding: '5px 0px 5px 5px',
+                color: '#000'
+            };
+            var imageDivStyle = {
+                backgroundPosition: 'center',
+                width: '120px',
+                height: '100px',
+                overflow: 'hidden',
+                display: 'block',
+                backgroundRepeat: 'no-repeat'
+            };
+            var imageStyle = {
+                width: '100%',
+                minHeight: '100%'
+            };
+            var titleStyle = {
+                paddingTop: '5spx',
+                fontFamily: 'ClanPro-News, Helvetica, sans-serif',
+                lineHeight: '24px',
+                fontSize: '20px',
+                color: '#262626',
+                marginBottom: '8px',
+                display: 'block'
+            };
+            var locationStyle = {
+                fontWeight: '400',
+                padding: '2px 0px',
+                maxWidth: '100%',
+                fontSize: '14px',
+                color: '#757575',
+                fontFamily: 'ClanPro-News, Helvetica, sans-serif',
+                lineHeight: '21px'
+            };
+            var detailsStyle = {
+                paddingRight: '5px',
+                color: '#262626',
+                fontFamily: 'ClanPro-News, Helvetica, sans-serif',
+                lineHeight: '21px',
+                fontSize: '14px'
+            };
+            var reviewStyle = {
+                paddingRight: '5px',
+                color: '#eea236',
+                display: 'block',
+                fontFamily: 'ClanPro-News, Helvetica, sans-serif',
+                lineHeight: '15px',
+                fontSize: '14px'
+            };
+            var favBtn = {
+                marginBottom: '20px'
+            };
+
             return React.createElement(
                 'div',
-                null,
+                { style: outerDivStyle, className: 'col-xs-12' },
                 React.createElement(
                     'div',
-                    { className: 'row col-xs-9', onClick: this.handleClick },
+                    { style: contentStyle },
                     React.createElement(
                         'div',
-                        { className: 'col-xs-6' },
+                        { className: 'col-xs-7' },
                         React.createElement(
-                            'h4',
-                            null,
-                            this.props.data.name
+                            'div',
+                            { style: titleStyle },
+                            this.props.data.yelpName
                         ),
                         React.createElement(
-                            'h5',
-                            null,
-                            'Rating : ',
-                            this.props.data.rating
+                            'div',
+                            { style: locationStyle },
+                            React.createElement(
+                                'span',
+                                null,
+                                this.props.data.yelpAddress1,
+                                ','
+                            ),
+                            React.createElement('br', null),
+                            React.createElement(
+                                'span',
+                                null,
+                                this.props.data.yelpCity
+                            ),
+                            '\xA0',
+                            React.createElement(
+                                'span',
+                                null,
+                                this.props.data.yelpState
+                            ),
+                            '\xA0',
+                            React.createElement(
+                                'span',
+                                null,
+                                this.props.data.yelpZipcode
+                            ),
+                            React.createElement('br', null),
+                            React.createElement(
+                                'span',
+                                null,
+                                this.props.data.yelpPhone
+                            )
                         ),
+                        React.createElement('br', null),
                         React.createElement(
-                            'h5',
-                            null,
+                            'div',
+                            { style: reviewStyle },
+                            React.createElement(
+                                'p',
+                                null,
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'Rating : ',
+                                    this.props.data.userRating
+                                )
+                            ),
+                            React.createElement(
+                                'p',
+                                null,
+                                'Review: ',
+                                this.props.data.userReview
+                            )
+                        ),
+                        React.createElement('br', null)
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'col-xs-3' },
+                        React.createElement('div', { style: titleStyle }),
+                        React.createElement(
+                            'div',
+                            { style: detailsStyle },
                             React.createElement(
                                 'span',
                                 null,
                                 'Price: ',
-                                this.props.data.price
+                                this.props.data.yelpPrice
                             ),
-                            '\xA0\xA0\xA0',
+                            React.createElement('br', null),
                             React.createElement(
                                 'span',
                                 null,
-                                'Cuisine: ',
-                                this.props.data.cusine
+                                'Cusine: ',
+                                this.props.data.yelpCategory
+                            ),
+                            React.createElement('br', null),
+                            React.createElement(
+                                'span',
+                                null,
+                                'Yelp Rating: ',
+                                this.props.data.yelpRating
+                            ),
+                            React.createElement('br', null)
+                        ),
+                        React.createElement(
+                            'div',
+                            null,
+                            React.createElement(
+                                'a',
+                                { href: this.props.data.yelpUrl, target: '_blank' },
+                                'Yelp Reviews (',
+                                this.props.data.yelpReviewCount,
+                                ') ...'
                             )
                         )
                     ),
                     React.createElement(
                         'div',
-                        { className: 'col-xs-6' },
+                        { className: 'col-xs-2' },
                         React.createElement(
-                            'span',
-                            null,
-                            this.props.data.street
+                            'div',
+                            { style: imageDivStyle },
+                            React.createElement('img', { src: this.props.data.yelpImageUrl, alt: 'Mountain View', style: imageStyle })
                         ),
                         React.createElement('br', null),
                         React.createElement(
-                            'span',
+                            'div',
                             null,
-                            this.props.data.city
-                        ),
-                        React.createElement('br', null),
-                        React.createElement(
-                            'span',
-                            null,
-                            this.props.data.state
-                        ),
-                        '\xA0\xA0\xA0',
-                        React.createElement(
-                            'span',
-                            null,
-                            this.props.data.zipcode
-                        ),
-                        React.createElement('br', null)
+                            React.createElement(
+                                'button',
+                                { style: favBtn, className: 'btn btn-warning' },
+                                'Favourite This'
+                            )
+                        )
                     )
                 )
             );

@@ -20,7 +20,9 @@ class ReviewContainer extends React.Component {
       yelpUrl:'',
       yelpImageUrl:'',
       yelpList: [],
-      errorMessage: ''
+      errorMessage: '',
+      message_review: '',
+      clearFlag_review: ''
     }
 
     this.callServiceAddRestaurantReview = this.callServiceAddRestaurantReview.bind(this);
@@ -56,7 +58,7 @@ class ReviewContainer extends React.Component {
       yelpState: data.location.state,
       yelpZipcode: data.location.zip_code,
       yelpPhone: data.display_phone,
-      yelpCategory: data.categories.alias,
+      yelpCategory: data.categories[0].alias,
       yelpRating: data.rating,
       yelpPrice: data.price,
       yelpReviewCount: data.review_count,
@@ -66,15 +68,18 @@ class ReviewContainer extends React.Component {
     return this.state;
   }
 
-  callServiceAddRestaurantReview(values){
+  callServiceAddRestaurantReview(values) {
     var restaurantData = this.callServiceConstructRestaurantData(values);
-    services.restaurants.create(restaurantData, function(newRestaurant, err){
+    services.restaurants.create(restaurantData, (newRestaurant, err)=>{
       if(newRestaurant){
-        console.log(newRestaurant);
-        // this.setState({
-        //   'message_review': 'Restaurant is added',
-        //   'clear_review' : true
-        // });
+        this.setState({
+          'message_review': 'Restaurant is added',
+          'clearFlag_review' : true
+        });
+        setTimeout(()=>{
+          this.setState({'message_review':''});
+        }, 1000);
+        this.props.listRestaurants();
       } else {
         this.setState('errorMessage': err.message);
       }
@@ -114,7 +119,7 @@ class ReviewContainer extends React.Component {
 
 
   callServiceAddReview(data){
-    var html = "<div class='col-xs-12'>" +
+    var html = "<div clas='bootbox-body row'>" +
             "<div class = 'form-group row'>" +
             "<label class = 'col-xs-5 label-control'>Rating</label>" +
             "<div class ='col-xs-7'>" +
@@ -134,9 +139,8 @@ class ReviewContainer extends React.Component {
             "</div>" +
           "</div>" +
          "</div>";
+
     var self = this;
-
-
 
     let dialog = bootbox.dialog({
       title: 'Review ' + data.name,
@@ -170,8 +174,8 @@ class ReviewContainer extends React.Component {
     return(
       <div>
         <h2>Review Restaurant</h2>
-          <YelpFinder search={this.callServiceFetchYelpData}/>
-          <YelpList data={this.state.yelpList} addReview={this.callServiceAddReview}/>
+          <YelpFinder search={this.callServiceFetchYelpData} message={this.props.message_review}/>
+          <YelpList data={this.state.yelpList} addReview={this.callServiceAddReview} />
       </div>
     )
   }

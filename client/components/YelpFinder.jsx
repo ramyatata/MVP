@@ -27,11 +27,24 @@ class YelpFinder extends React.Component {
 
   render() {
     return (
+      <div className='col-xs-12'>
       <form>
-          <input name='term' type='text' value={this.state.term} onChange={this.handleInputChange} placeholder='Find Restaurant ...'/>
-          <input name='location' type='text' value={this.state.location} onChange={this.handleInputChange} placeholder='Location..'/>
-          <button type='button' onClick={this.handleSearch}>Search</button>
-      </form>
+      <div className='col-xs-9'>
+          <div className='col-xs-5'>
+            <input className='form-control' name='term' type='text' value={this.state.term} onChange={this.handleInputChange} placeholder='Find Restaurant ...'/>
+          </div>
+          <div className='col-xs-5'>
+          <input className='form-control' name='location' type='text' value={this.state.location} onChange={this.handleInputChange} placeholder='Location..'/>
+          </div>
+          <div className='col-xs-2'>
+          <button type='button' className='form-control btn btn-warning' onClick={this.handleSearch}>Search</button>
+          </div>
+        </div>
+        <div className='col-xs-9 text-center'>
+          <label text={this.props.message} value={this.props.message}></label>
+        </div>
+        </form>
+      </div>
     );
   }
 }

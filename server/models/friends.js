@@ -1,5 +1,5 @@
 module.exports = function(sequelize, Sequelize){
-  return sequelize.define('friends', {
+  return sequelize.define('friendsRelationship', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -9,17 +9,10 @@ module.exports = function(sequelize, Sequelize){
       type: Sequelize.INTEGER,
       allowNull: false
     },
-    friendId: {
+    buddyId: {
       type: Sequelize.INTEGER,
       allowNull: false
     }
-  }, {
-    indexes: [
-      {
-        unique: true,
-        fields: ['userId', 'friendId']
-      }
-    ]
   })
 };
 

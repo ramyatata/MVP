@@ -9,44 +9,55 @@ module.exports = function(sequelize, Sequelize){
       type: Sequelize.INTEGER,
       allowNull: false
     },
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true
-    },
-    street: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    city: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    state:  {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    zipcode:  {
-      type: Sequelize.INTEGER,
-      allowNull: false
-    },
-    cusine:  {
+    userRating: {
       type: Sequelize.STRING
     },
-    rating: {
+    userReview:  {
+      type: Sequelize.STRING
+    },
+    yelpId: {
+      type: Sequelize.STRING,
+      unique: true
+    },
+    yelpName: {
       type: Sequelize.STRING,
       allowNull: false
     },
-    price:  {
-      type: Sequelize.STRING,
-      allowNull: false
+    yelpAddress1: {
+      type: Sequelize.STRING
     },
-    review:  {
-      type: Sequelize.STRING,
-      allowNull: false
+    yelpAddress2: {
+      type: Sequelize.STRING
     },
-    picture:  {
-      type: Sequelize.BLOB
+    yelpCity: {
+      type: Sequelize.STRING
+    },
+    yelpState:  {
+      type: Sequelize.STRING
+    },
+    yelpZipcode:  {
+      type: Sequelize.INTEGER
+    },
+    yelpPhone:{
+      type: Sequelize.STRING
+    },
+    yelpCategory:  {
+      type: Sequelize.STRING
+    },
+    yelpRating: {
+      type: Sequelize.STRING
+    },
+    yelpPrice:  {
+      type: Sequelize.STRING
+    },
+    yelpReviewCount: {
+      type: Sequelize.INTEGER
+    },
+    yelpUrl:{
+      type: Sequelize.STRING
+    },
+    yelpImageUrl:  {
+      type: Sequelize.STRING
     }
   });
 };

@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "build": "babel ./client/components -d ./client/dist -w"
   },
   "author": "",
@@ -21,7 +21,8 @@
     "path": "^0.12.7",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "sequelize": "^4.15.0"
+    "sequelize": "^4.15.0",
+    "yelp-fusion": "^1.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

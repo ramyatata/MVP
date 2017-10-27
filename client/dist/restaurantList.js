@@ -8,6 +8,30 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// class RestaurantList extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {};
+//     }
+//     render() {
+//         const listStyle = {
+//           'listStyle': 'none'
+//         };
+
+//         var entries = this.props.data.map((item, ind) => <li key={ind}><RestaurantEntry data={item} showRestaurantDetails={this.props.showRestaurantDetails}/></li>);
+
+//         return (
+//             <div>
+//                 <ul style={listStyle}>
+//                   {entries}
+//                 </ul>
+//             </div>
+//         )
+//     }
+// }
+
+// window.RestaurantList = RestaurantList;
+
 var RestaurantList = function (_React$Component) {
     _inherits(RestaurantList, _React$Component);
 
@@ -23,28 +47,19 @@ var RestaurantList = function (_React$Component) {
     _createClass(RestaurantList, [{
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
-            var listStyle = {
-                'listStyle': 'none'
+            var divStyle = {
+                display: 'block',
+                padding: '40px',
+                margin: 'auto'
             };
-
             var entries = this.props.data.map(function (item, ind) {
-                return React.createElement(
-                    'li',
-                    { key: ind },
-                    React.createElement(RestaurantEntry, { data: item, showRestaurantDetails: _this2.props.showRestaurantDetails })
-                );
+                return React.createElement(RestaurantEntry, { data: item, key: ind });
             });
 
             return React.createElement(
                 'div',
-                null,
-                React.createElement(
-                    'ul',
-                    { style: listStyle },
-                    entries
-                )
+                { style: divStyle, className: 'col-xs-10' },
+                entries
             );
         }
     }]);

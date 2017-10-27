@@ -47,14 +47,39 @@ var YelpFinder = function (_React$Component) {
     key: 'render',
     value: function render() {
       return React.createElement(
-        'form',
-        null,
-        React.createElement('input', { name: 'term', type: 'text', value: this.state.term, onChange: this.handleInputChange, placeholder: 'Find Restaurant ...' }),
-        React.createElement('input', { name: 'location', type: 'text', value: this.state.location, onChange: this.handleInputChange, placeholder: 'Location..' }),
+        'div',
+        { className: 'col-xs-12' },
         React.createElement(
-          'button',
-          { type: 'button', onClick: this.handleSearch },
-          'Search'
+          'form',
+          null,
+          React.createElement(
+            'div',
+            { className: 'col-xs-9' },
+            React.createElement(
+              'div',
+              { className: 'col-xs-5' },
+              React.createElement('input', { className: 'form-control', name: 'term', type: 'text', value: this.state.term, onChange: this.handleInputChange, placeholder: 'Find Restaurant ...' })
+            ),
+            React.createElement(
+              'div',
+              { className: 'col-xs-5' },
+              React.createElement('input', { className: 'form-control', name: 'location', type: 'text', value: this.state.location, onChange: this.handleInputChange, placeholder: 'Location..' })
+            ),
+            React.createElement(
+              'div',
+              { className: 'col-xs-2' },
+              React.createElement(
+                'button',
+                { type: 'button', className: 'form-control btn btn-warning', onClick: this.handleSearch },
+                'Search'
+              )
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-xs-9 text-center' },
+            React.createElement('label', { text: this.props.message, value: this.props.message })
+          )
         )
       );
     }

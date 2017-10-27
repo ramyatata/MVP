@@ -5,6 +5,7 @@ const colors = require('colors');
 
 //get all
 router.get('/', (req, res) => {
+  console.log(colors.blue('calling users table'));
   db.users.findAll({})
   .then((users) => {
     res.status(200);

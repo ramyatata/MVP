@@ -37,7 +37,9 @@ var ReviewContainer = function (_React$Component) {
       yelpUrl: '',
       yelpImageUrl: '',
       yelpList: [],
-      errorMessage: ''
+      errorMessage: '',
+      message_review: '',
+      clearFlag_review: ''
     };
 
     _this.callServiceAddRestaurantReview = _this.callServiceAddRestaurantReview.bind(_this);
@@ -76,7 +78,7 @@ var ReviewContainer = function (_React$Component) {
         yelpState: data.location.state,
         yelpZipcode: data.location.zip_code,
         yelpPhone: data.display_phone,
-        yelpCategory: data.categories.alias,
+        yelpCategory: data.categories[0].alias,
         yelpRating: data.rating,
         yelpPrice: data.price,
         yelpReviewCount: data.review_count,
@@ -88,16 +90,21 @@ var ReviewContainer = function (_React$Component) {
   }, {
     key: 'callServiceAddRestaurantReview',
     value: function callServiceAddRestaurantReview(values) {
+      var _this2 = this;
+
       var restaurantData = this.callServiceConstructRestaurantData(values);
       services.restaurants.create(restaurantData, function (newRestaurant, err) {
         if (newRestaurant) {
-          console.log(newRestaurant);
-          // this.setState({
-          //   'message_review': 'Restaurant is added',
-          //   'clear_review' : true
-          // });
+          _this2.setState({
+            'message_review': 'Restaurant is added',
+            'clearFlag_review': true
+          });
+          setTimeout(function () {
+            _this2.setState({ 'message_review': '' });
+          }, 1000);
+          _this2.props.listRestaurants();
         } else {
-          this.setState('errorMessage');
+          _this2.setState('errorMessage');
         }
       });
     }
@@ -124,23 +131,24 @@ var ReviewContainer = function (_React$Component) {
   }, {
     key: 'callServiceFetchYelpData',
     value: function callServiceFetchYelpData(searchCriteria) {
-      var _this2 = this;
+      var _this3 = this;
 
       window.fetchYelpData(searchCriteria, function (results, err) {
         if (results) {
-          _this2.setState({ 'yelpList': results });
-          console.log(_this2.state.yelpList.length);
+          _this3.setState({ 'yelpList': results });
+          console.log(_this3.state.yelpList.length);
         } else {
-          _this2.setState({ 'errorMessage': err.message });
+          _this3.setState({ 'errorMessage': err.message });
         }
       });
     }
   }, {
     key: 'callServiceAddReview',
     value: function callServiceAddReview(data) {
-      var _this3 = this;
+      var _this4 = this;
 
-      var html = "<div class='col-xs-12'>" + "<div class = 'form-group row'>" + "<label class = 'col-xs-5 label-control'>Rating</label>" + "<div class ='col-xs-7'>" + "<select class = 'form-control' id='userRating'>" + "<option value='1'>One</option>" + "<option value='2'>Two</option>" + "<option value='3'>Three</option>" + "<option value='4'>Four</option>" + "<option value='5'>Five</option>" + "</select>" + "</div>" + "</div>" + "<div class = 'form-group row'>" + "<label class = 'col-xs-5'>Review</label>" + "<div class ='col-xs-7'>" + "<textarea class = 'form-control' id='userReview' rows='3'></textarea>" + "</div>" + "</div>" + "</div>";
+      var html = "<div clas='bootbox-body row'>" + "<div class = 'form-group row'>" + "<label class = 'col-xs-5 label-control'>Rating</label>" + "<div class ='col-xs-7'>" + "<select class = 'form-control' id='userRating'>" + "<option value='1'>One</option>" + "<option value='2'>Two</option>" + "<option value='3'>Three</option>" + "<option value='4'>Four</option>" + "<option value='5'>Five</option>" + "</select>" + "</div>" + "</div>" + "<div class = 'form-group row'>" + "<label class = 'col-xs-5'>Review</label>" + "<div class ='col-xs-7'>" + "<textarea class = 'form-control' id='userReview' rows='3'></textarea>" + "</div>" + "</div>" + "</div>";
+
       var self = this;
 
       var dialog = bootbox.dialog({
@@ -157,7 +165,7 @@ var ReviewContainer = function (_React$Component) {
               data.userReview = userReview;
               data.userRating = userRating;
 
-              _this3.callServiceAddRestaurantReview(data);
+              _this4.callServiceAddRestaurantReview(data);
             }
           },
           ok: {
@@ -179,7 +187,7 @@ var ReviewContainer = function (_React$Component) {
           null,
           'Review Restaurant'
         ),
-        React.createElement(YelpFinder, { search: this.callServiceFetchYelpData }),
+        React.createElement(YelpFinder, { search: this.callServiceFetchYelpData, message: this.props.message_review }),
         React.createElement(YelpList, { data: this.state.yelpList, addReview: this.callServiceAddReview })
       );
     }

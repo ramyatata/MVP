@@ -22,7 +22,6 @@ window.services = {
         type: 'GET',
         contentType: 'application/json',
         success: function(results){
-          console.log('Success restaurants list');
           callback(results);
         },
         error: function(err){

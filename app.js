@@ -10,6 +10,7 @@ const usersRoute = require('./server/routes/users');
 const favouritesRoute = require('./server/routes/favourites');
 const friendsRoute = require('./server/routes/friends');
 const restaurantsRoute = require('./server/routes/restaurants');
+const yelpRoute = require('./server/routes/yelp');
 
 const port = process.env.PORT || 8088;
 
@@ -29,6 +30,7 @@ app.use('/users', usersRoute);
 app.use('/favourites', favouritesRoute);
 app.use('/friends', friendsRoute);
 app.use('/restaurants', restaurantsRoute);
+app.use('/yelp', yelpRoute);
 
 //error-handling middleware
 app.use((err, req, res, next)=>{

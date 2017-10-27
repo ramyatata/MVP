@@ -8,6 +8,53 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// class YelpEntry extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {};
+
+//         this.handleClick = this.handleClick.bind(this);
+//     }
+
+//     handleClick(){
+//       this.props.addReview(this.props.data);
+//     }
+
+//     render() {
+//         return (
+//             <div>
+//                 <div className='row col-xs-9' onClick={this.handleClick}>
+//                     <div className='col-xs-6'>
+//                         <h4>{this.props.data.name}</h4>
+//                         <h5>Rating : {this.props.data.rating}</h5>
+//                         <h5><span>Price: {this.props.data.price}</span>&nbsp;&nbsp;&nbsp;<span>Category: {this.props.data.categories[0].alias}</span></h5>
+//                     </div>
+//                     <div className='col-xs-6'>
+//                         <span>{this.props.data.location.address1}</span><br/>
+//                         <span>{this.props.data.location.city}</span><br/>
+//                         <span>{this.props.data.location.state}</span>&nbsp;&nbsp;&nbsp;<span>{this.props.data.location.zip_code}</span><br/>
+//                         <span>{this.props.data.display_phone}</span><br/>
+//                     </div>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
+
+
+// var outerDivStyle = {
+//             width: '33.3333 %',
+//             paddingLeft: '60px',
+//             height: '357px'
+//         };
+//         var imageStyle = {
+//             backgroundPosition: 'center',
+//             height: '240px',
+//             display: 'block'
+//         };
+//
+//
+//
 var YelpEntry = function (_React$Component) {
     _inherits(YelpEntry, _React$Component);
 
@@ -30,79 +77,110 @@ var YelpEntry = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var containerStyle = {
+                width: '20%',
+                cursor: 'pointer',
+                marginBottom: '25px',
+                marginRight: '25px',
+                height: '300px'
+            };
+            var imageStyle = {
+                width: '100%',
+                height: '50%'
+            };
+            var titleStyle = {
+                paddingTop: '10px',
+                fontFamily: 'ClanPro-News, Helvetica, sans-serif',
+                lineHeight: '24px',
+                fontSize: '16px',
+                color: '#262626'
+            };
+            var locationStyle = {
+                paddingRight: '5px',
+                color: 'dimgrey',
+                display: 'block',
+                fontFamily: 'ClanPro-News, Helvetica, sans-serif',
+                lineHeight: '21px',
+                fontSize: '13px'
+            };
+            var detailsStyle = {
+                fontWeight: '400',
+                padding: '2px 0px',
+                maxWidth: '100%',
+                fontSize: '14px',
+                color: 'black',
+                fontFamily: 'ClanPro-News, Helvetica, sans-serif',
+                lineHeight: '21px'
+            };
+
             return React.createElement(
                 'div',
-                null,
+                { onClick: this.handleClick, style: containerStyle },
+                React.createElement('img', { src: this.props.data.image_url, alt: this.props.data.name, style: imageStyle }),
                 React.createElement(
                     'div',
-                    { className: 'row col-xs-9', onClick: this.handleClick },
+                    { style: titleStyle },
+                    this.props.data.name
+                ),
+                React.createElement(
+                    'div',
+                    { style: locationStyle },
                     React.createElement(
-                        'div',
-                        { className: 'col-xs-6' },
-                        React.createElement(
-                            'h4',
-                            null,
-                            this.props.data.name
-                        ),
-                        React.createElement(
-                            'h5',
-                            null,
-                            'Rating : ',
-                            this.props.data.rating
-                        ),
-                        React.createElement(
-                            'h5',
-                            null,
-                            React.createElement(
-                                'span',
-                                null,
-                                'Price: ',
-                                this.props.data.price
-                            ),
-                            '\xA0\xA0\xA0',
-                            React.createElement(
-                                'span',
-                                null,
-                                'Category: ',
-                                this.props.data.categories[0].alias
-                            )
-                        )
+                        'span',
+                        null,
+                        this.props.data.location.address1,
+                        ','
                     ),
+                    '\xA0',
                     React.createElement(
-                        'div',
-                        { className: 'col-xs-6' },
-                        React.createElement(
-                            'span',
-                            null,
-                            this.props.data.location.address1
-                        ),
-                        React.createElement('br', null),
-                        React.createElement(
-                            'span',
-                            null,
-                            this.props.data.location.city
-                        ),
-                        React.createElement('br', null),
-                        React.createElement(
-                            'span',
-                            null,
-                            this.props.data.location.state
-                        ),
-                        '\xA0\xA0\xA0',
-                        React.createElement(
-                            'span',
-                            null,
-                            this.props.data.location.zip_code
-                        ),
-                        React.createElement('br', null),
-                        React.createElement(
-                            'span',
-                            null,
-                            this.props.data.display_phone
-                        ),
-                        React.createElement('br', null)
+                        'span',
+                        null,
+                        this.props.data.location.city
+                    ),
+                    '\xA0',
+                    React.createElement(
+                        'span',
+                        null,
+                        this.props.data.location.state
+                    ),
+                    '\xA0',
+                    React.createElement(
+                        'span',
+                        null,
+                        this.props.data.location.zip_code
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        'span',
+                        null,
+                        this.props.data.display_phone
                     )
-                )
+                ),
+                React.createElement(
+                    'div',
+                    null,
+                    React.createElement(
+                        'span',
+                        null,
+                        'Rating : ',
+                        this.props.data.rating
+                    ),
+                    '\xA0\xA0',
+                    React.createElement(
+                        'span',
+                        null,
+                        'Price: ',
+                        this.props.data.price
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        'span',
+                        null,
+                        'Cusine: ',
+                        this.props.data.categories[0].alias
+                    )
+                ),
+                React.createElement('br', null)
             );
         }
     }]);
