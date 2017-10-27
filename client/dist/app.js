@@ -23,12 +23,14 @@ var App = function (_React$Component) {
       restaurantsList: [],
       message_restaurant: '',
       newFriendsList: [],
-      name: 'Ram'
+      message_fav: '',
+      favouritesList: []
     };
 
     _this.callServiceListRestaurant = _this.callServiceListRestaurant.bind(_this);
     _this.callServiceAddUser = _this.callServiceAddUser.bind(_this);
     _this.callServiceListUser = _this.callServiceListUser.bind(_this);
+    _this.callServiceGetUserFavourites = _this.callServiceGetUserFavourites.bind(_this);
     return _this;
   }
   //Restaurant
@@ -77,9 +79,23 @@ var App = function (_React$Component) {
       });
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'callServiceGetUserFavourites',
+    value: function callServiceGetUserFavourites(userId) {
+      var _this3 = this;
+
+      services.favourites.get(userId, function (favs, err) {
+        if (favs) {
+          _this3.setState({ 'favouritesList': favs });
+        } else {
+          _this3.setState('message_fav');
+        }
+      });
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
       this.callServiceListRestaurant();
+      this.callServiceGetUserFavourites(2);
     }
   }, {
     key: 'render',
@@ -104,7 +120,7 @@ var App = function (_React$Component) {
             null,
             React.createElement(
               'a',
-              { href: '#restaurants', 'data-toggle': 'tab' },
+              { href: '#restaurant', 'data-toggle': 'tab' },
               'Find Restaurant'
             )
           ),
@@ -113,8 +129,8 @@ var App = function (_React$Component) {
             null,
             React.createElement(
               'a',
-              { href: '#friends', 'data-toggle': 'tab' },
-              'Friends'
+              { href: '#favourite', 'data-toggle': 'tab' },
+              'Favourites'
             )
           ),
           React.createElement(
@@ -137,13 +153,13 @@ var App = function (_React$Component) {
           ),
           React.createElement(
             'div',
-            { className: 'tab-pane', id: 'restaurants' },
+            { className: 'tab-pane', id: 'restaurant' },
             React.createElement(RestaurantPane, { restaurants: this.state.restaurantsList })
           ),
           React.createElement(
             'div',
-            { className: 'tab-pane', id: 'friends' },
-            React.createElement(FriendsPane, null)
+            { className: 'tab-pane', id: 'favourite' },
+            React.createElement(FavouritePane, { favourites: this.state.favouritesList })
           ),
           React.createElement(
             'div',
@@ -157,6 +173,9 @@ var App = function (_React$Component) {
 
   return App;
 }(React.Component);
+
+//send userId for fav restuarants - TODO -- set currentUser in state
+
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
 

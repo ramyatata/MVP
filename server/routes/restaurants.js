@@ -17,12 +17,12 @@ router.get('/', (req, res) => {
 
 //get by id
 router.get('/:id', (req, res) => {
-  const userId = req.params.id;
+  const id = req.params.id;
 
-  db.restaurants.findById(userId)
-  .then((resultRestaurant) => {
+  db.restaurants.findById(id)
+  .then((restaurant) => {
     res.status(200);
-    res.json(resultRestaurant);
+    res.json(restaurant);
   })
   .catch((err) => {
     throw err;

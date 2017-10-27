@@ -8,42 +8,39 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var YelpList = function (_React$Component) {
-    _inherits(YelpList, _React$Component);
+var FavouriteList = function (_React$Component) {
+    _inherits(FavouriteList, _React$Component);
 
-    function YelpList(props) {
-        _classCallCheck(this, YelpList);
+    function FavouriteList(props) {
+        _classCallCheck(this, FavouriteList);
 
-        var _this = _possibleConstructorReturn(this, (YelpList.__proto__ || Object.getPrototypeOf(YelpList)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (FavouriteList.__proto__ || Object.getPrototypeOf(FavouriteList)).call(this, props));
 
         _this.state = {};
         return _this;
     }
 
-    _createClass(YelpList, [{
+    _createClass(FavouriteList, [{
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
             var divStyle = {
-                marginTop: '20px',
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap'
+                display: 'block',
+                padding: '40px',
+                margin: 'auto'
             };
             var entries = this.props.data.map(function (item, ind) {
-                return React.createElement(YelpEntry, { data: item, key: ind, addReview: _this2.props.addReview });
+                return React.createElement(FavouriteEntry, { data: item.restaurant, key: ind });
             });
 
             return React.createElement(
                 'div',
-                { className: 'col-xs-12', style: divStyle },
+                { style: divStyle, className: 'col-xs-10' },
                 entries
             );
         }
     }]);
 
-    return YelpList;
+    return FavouriteList;
 }(React.Component);
 
-window.YelpList = YelpList;
+window.FavouriteList = FavouriteList;

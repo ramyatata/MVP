@@ -15,7 +15,8 @@ module.exports = function(sequelize, Sequelize){
     },
     visited: {
       type: Sequelize.BOOLEAN,
-      default: false
+      allowNull: false,
+      defaultValue: false
     }
   });
 };

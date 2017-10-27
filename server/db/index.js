@@ -31,7 +31,8 @@ const favourites = require('../models/favourites')(sequelize, Sequelize);
 //   });
 // });
  //restaurants.sync();
-// favourites.sync();
+ //favourites.sync();
+
 
 // friendsRelationship.sync()
 // .then(()=>{
@@ -55,8 +56,8 @@ const favourites = require('../models/favourites')(sequelize, Sequelize);
 
 
 //one restaurant can be many favourites. RESTAURANTS <=> FAVOURITES
-// restaurants.hasMany(favourites, {foreignkey: 'restaurantId'});
-// favourites.belongsTo(restaurants);
+restaurants.hasMany(favourites, {foreignkey: 'restaurantId'});
+favourites.belongsTo(restaurants);
 
 
 //These are not working

@@ -15,14 +15,18 @@ router.get('/', (req, res) => {
   })
 });
 
-//get by id
-router.get('/:id', (req, res) => {
-  const id = req.params.id;
 
-  db.favourites.findById(id)
-  .then((resultFavourite) => {
+//get by all fav restaurants of a user - id is userId
+router.get('/:id', (req, res) => {
+  const userId = req.params.id;
+
+  db.favourites.findAll({
+    where:{'userId': userId},
+    include:[{ model: db.restaurants}]
+  })
+  .then((favouriteRestaurants) => {
     res.status(200);
-    res.json(resultFavourite);
+    res.json(favouriteRestaurants);
   })
   .catch((err) => {
     throw err;

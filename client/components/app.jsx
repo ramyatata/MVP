@@ -1,5 +1,5 @@
-
 class App extends React.Component {
+
   constructor(){
     super();
     this.state = {
@@ -9,12 +9,14 @@ class App extends React.Component {
       restaurantsList: [],
       message_restaurant: '',
       newFriendsList: [],
-      name: 'Ram'
+      message_fav: '',
+      favouritesList: []
     };
 
     this.callServiceListRestaurant = this.callServiceListRestaurant.bind(this);
     this.callServiceAddUser = this.callServiceAddUser.bind(this);
     this.callServiceListUser = this.callServiceListUser.bind(this);
+    this.callServiceGetUserFavourites = this.callServiceGetUserFavourites.bind(this);
   }
   //Restaurant
   callServiceListRestaurant(){
@@ -54,9 +56,19 @@ class App extends React.Component {
       }
     });
   }
+  callServiceGetUserFavourites(userId){
+    services.favourites.get(userId, (favs, err) => {
+      if(favs){
+        this.setState({'favouritesList': favs});
+      } else {
+        this.setState('message_fav': err.message);
+      }
+    });
+  }
 
-  componentDidMount(){
+  componentWillMount(){
     this.callServiceListRestaurant();
+    this.callServiceGetUserFavourites(2);
   }
 
   render() {
@@ -64,19 +76,19 @@ class App extends React.Component {
       <div className='container'>
         <ul className='nav nav-tabs nav-justified'>
           <li><a href='#review' data-toggle='tab'>Write Review</a></li>
-          <li><a href='#restaurants' data-toggle='tab'>Find Restaurant</a></li>
-          <li><a href='#friends' data-toggle='tab'>Friends</a></li>
+          <li><a href='#restaurant' data-toggle='tab'>Find Restaurant</a></li>
+          <li><a href='#favourite' data-toggle='tab'>Favourites</a></li>
           <li><a href='#login' data-toggle='tab'>Login</a></li>
         </ul>
         <div className='tab-content'>
           <div className='tab-pane' id='review'>
             <ReviewContainer callServiceCreate={this.callServiceAddRestaurant} message={this.state.message} listRestaurants={this.callServiceListRestaurant}/>
           </div>
-          <div className='tab-pane' id='restaurants'>
+          <div className='tab-pane' id='restaurant'>
             <RestaurantPane restaurants={this.state.restaurantsList} />
           </div>
-          <div className='tab-pane' id='friends'>
-            <FriendsPane/>
+          <div className='tab-pane' id='favourite' >
+            <FavouritePane favourites={this.state.favouritesList}/>
           </div>
           <div className='tab-pane' id='login'>
              <Login/>
@@ -87,6 +99,7 @@ class App extends React.Component {
   }
 }
 
+//send userId for fav restuarants - TODO -- set currentUser in state
 ReactDOM.render(<App/>, document.getElementById('root'));
 
 window.App = App;
