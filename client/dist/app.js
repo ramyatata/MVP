@@ -105,6 +105,12 @@ var App = function (_React$Component) {
       services.favourites.create(values, function (newFav, err) {
         if (newFav) {
           _this4.callServiceGetUserFavourites(userId);
+
+          var filteredList = _this4.state.restaurantsList.filter(function (restaurant) {
+            return restaurant.id !== restaurantId;
+          });
+
+          _this4.setState({ restaurantsList: filteredList });
         } else {
           _this4.setState('message_fav');
         }

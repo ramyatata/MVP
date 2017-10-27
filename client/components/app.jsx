@@ -75,13 +75,19 @@ class App extends React.Component {
     services.favourites.create(values, (newFav, err) => {
       if(newFav) {
         this.callServiceGetUserFavourites(userId);
+
+        const filteredList = this.state.restaurantsList.filter((restaurant) =>
+          restaurant.id !== restaurantId
+        );
+
+        this.setState({restaurantsList: filteredList});
       } else {
         this.setState('message_fav': err.message);
       }
     });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.callServiceListRestaurant();
     this.callServiceGetUserFavourites(2);
   }
