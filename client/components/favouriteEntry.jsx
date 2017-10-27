@@ -4,6 +4,8 @@ class FavouriteEntry extends React.Component {
     this.state = {};
   }
 
+
+
   render() {
 
     var outerDivStyle = {
@@ -65,6 +67,7 @@ class FavouriteEntry extends React.Component {
     var favBtn = {
       marginBottom: '20px'
     };
+
     return (
       <div style={outerDivStyle} className='col-xs-12'>
         <div style={contentStyle}>

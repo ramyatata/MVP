@@ -83,6 +83,7 @@ var FavouriteEntry = function (_React$Component) {
       var favBtn = {
         marginBottom: '20px'
       };
+
       return React.createElement(
         'div',
         { style: outerDivStyle, className: 'col-xs-12' },

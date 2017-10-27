@@ -17,6 +17,7 @@ class App extends React.Component {
     this.callServiceAddUser = this.callServiceAddUser.bind(this);
     this.callServiceListUser = this.callServiceListUser.bind(this);
     this.callServiceGetUserFavourites = this.callServiceGetUserFavourites.bind(this);
+    this.callServiceAddFavourite = this.callServiceAddFavourite.bind(this);
   }
   //Restaurant
   callServiceListRestaurant(){
@@ -65,8 +66,22 @@ class App extends React.Component {
       }
     });
   }
+  callServiceAddFavourite(restaurantId){
+    const userId = this.state.currentUser;
+    const values = {
+      userId: userId,
+      restaurantId: restaurantId
+    };
+    services.favourites.create(values, (newFav, err) => {
+      if(newFav) {
+        this.callServiceGetUserFavourites(userId);
+      } else {
+        this.setState('message_fav': err.message);
+      }
+    });
+  }
 
-  componentWillMount(){
+  componentDidMount(){
     this.callServiceListRestaurant();
     this.callServiceGetUserFavourites(2);
   }
@@ -85,7 +100,7 @@ class App extends React.Component {
             <ReviewContainer callServiceCreate={this.callServiceAddRestaurant} message={this.state.message} listRestaurants={this.callServiceListRestaurant}/>
           </div>
           <div className='tab-pane' id='restaurant'>
-            <RestaurantPane restaurants={this.state.restaurantsList} />
+            <RestaurantPane restaurants={this.state.restaurantsList} addToFavourites={this.callServiceAddFavourite}/>
           </div>
           <div className='tab-pane' id='favourite' >
             <FavouritePane favourites={this.state.favouritesList}/>

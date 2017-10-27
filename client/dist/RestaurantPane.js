@@ -31,7 +31,7 @@ var RestaurantPane = function (_React$Component) {
           null,
           "List of restaurant"
         ),
-        React.createElement(RestaurantList, { data: this.props.restaurants })
+        React.createElement(RestaurantList, { data: this.props.restaurants, addToFavourites: this.props.addToFavourites })
       );
     }
   }]);

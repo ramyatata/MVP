@@ -17,10 +17,17 @@ var RestaurantEntry = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (RestaurantEntry.__proto__ || Object.getPrototypeOf(RestaurantEntry)).call(this, props));
 
         _this.state = {};
+
+        _this.addToFavouritesHandler = _this.addToFavouritesHandler.bind(_this);
         return _this;
     }
 
     _createClass(RestaurantEntry, [{
+        key: 'addToFavouritesHandler',
+        value: function addToFavouritesHandler() {
+            this.props.addToFavourites(this.props.data.id);
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -210,7 +217,7 @@ var RestaurantEntry = function (_React$Component) {
                             null,
                             React.createElement(
                                 'button',
-                                { style: favBtn, className: 'btn btn-warning' },
+                                { style: favBtn, className: 'btn btn-warning', onClick: this.addToFavouritesHandler },
                                 'Favourite This'
                             )
                         )

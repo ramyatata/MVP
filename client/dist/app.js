@@ -31,6 +31,7 @@ var App = function (_React$Component) {
     _this.callServiceAddUser = _this.callServiceAddUser.bind(_this);
     _this.callServiceListUser = _this.callServiceListUser.bind(_this);
     _this.callServiceGetUserFavourites = _this.callServiceGetUserFavourites.bind(_this);
+    _this.callServiceAddFavourite = _this.callServiceAddFavourite.bind(_this);
     return _this;
   }
   //Restaurant
@@ -92,8 +93,26 @@ var App = function (_React$Component) {
       });
     }
   }, {
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'callServiceAddFavourite',
+    value: function callServiceAddFavourite(restaurantId) {
+      var _this4 = this;
+
+      var userId = this.state.currentUser;
+      var values = {
+        userId: userId,
+        restaurantId: restaurantId
+      };
+      services.favourites.create(values, function (newFav, err) {
+        if (newFav) {
+          _this4.callServiceGetUserFavourites(userId);
+        } else {
+          _this4.setState('message_fav');
+        }
+      });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       this.callServiceListRestaurant();
       this.callServiceGetUserFavourites(2);
     }
@@ -154,7 +173,7 @@ var App = function (_React$Component) {
           React.createElement(
             'div',
             { className: 'tab-pane', id: 'restaurant' },
-            React.createElement(RestaurantPane, { restaurants: this.state.restaurantsList })
+            React.createElement(RestaurantPane, { restaurants: this.state.restaurantsList, addToFavourites: this.callServiceAddFavourite })
           ),
           React.createElement(
             'div',

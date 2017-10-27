@@ -23,13 +23,15 @@ var RestaurantList = function (_React$Component) {
     _createClass(RestaurantList, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var divStyle = {
                 display: 'block',
                 padding: '40px',
                 margin: 'auto'
             };
             var entries = this.props.data.map(function (item, ind) {
-                return React.createElement(RestaurantEntry, { data: item, key: ind });
+                return React.createElement(RestaurantEntry, { data: item, key: ind, addToFavourites: _this2.props.addToFavourites });
             });
 
             return React.createElement(

@@ -7,7 +7,7 @@ class RestaurantPane extends React.Component{
     return(
       <div>
         <h2>List of restaurant</h2>
-        <RestaurantList data={this.props.restaurants}/>
+        <RestaurantList data={this.props.restaurants} addToFavourites={this.props.addToFavourites}/>
       </div>
     )
   }

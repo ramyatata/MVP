@@ -10,7 +10,7 @@ class RestaurantList extends React.Component {
             padding: '40px',
             margin: 'auto'
         };
-        var entries = this.props.data.map((item, ind) => <RestaurantEntry data={item} key={ind}/>);
+        var entries = this.props.data.map((item, ind) => <RestaurantEntry data={item} key={ind} addToFavourites={this.props.addToFavourites}/>);
 
         return (
             <div style={divStyle} className='col-xs-10'>{entries}</div>

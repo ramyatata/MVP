@@ -2,6 +2,12 @@ class RestaurantEntry extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+
+        this.addToFavouritesHandler = this.addToFavouritesHandler.bind(this);
+    }
+
+    addToFavouritesHandler(){
+      this.props.addToFavourites(this.props.data.id);
     }
 
     render() {
@@ -105,7 +111,7 @@ class RestaurantEntry extends React.Component {
                     </div>
                     <br/>
                     <div>
-                            <button style={favBtn} className='btn btn-warning'>Favourite This</button>
+                            <button style={favBtn} className='btn btn-warning' onClick={this.addToFavouritesHandler}>Favourite This</button>
                         </div>
                         </div>
                 </div>

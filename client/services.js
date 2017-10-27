@@ -63,17 +63,16 @@ window.services = {
     }
   },
   favourites: {
-    create: function(values, callback){
+    create: function(values, callback) {
        $.ajax({
         url: 'http://localhost:8088/favourites',
         type: 'POST',
         data: JSON.stringify(values),
         contentType: 'application/json',
-        dataType: 'application/json',
         success: function(results){
           callback(results, null);
         },
-        failure: function(err, callback){
+        failure: function(err, callback) {
           callback(null, err);
         }
       });
