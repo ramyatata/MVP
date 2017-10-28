@@ -20,7 +20,8 @@ var Login = function (_React$Component) {
 
     _this.state = {
       userName: '',
-      password: ''
+      password: '',
+      user: {}
     };
 
     _this.handleSignupClick = _this.handleSignupClick.bind(_this);
@@ -55,7 +56,10 @@ var Login = function (_React$Component) {
             userName: '',
             password: ''
           });
-          ReactDOM.render(React.createElement(App, { user: newUser }), document.getElementById('root'));
+          _this2.setState({ 'user': newUser });
+          console.log('logged in user');
+          console.log(_this2.state.user);
+          ReactDOM.render(React.createElement(App, { user: _this2.state.user }), document.getElementById('root'));
         } else {
           console.log('Login user err');
         }
@@ -64,9 +68,12 @@ var Login = function (_React$Component) {
   }, {
     key: 'callServiceCreateUser',
     value: function callServiceCreateUser(values) {
+      var _this3 = this;
+
       services.users.create(values, function (newUser, err) {
         if (newUser) {
-          ReactDOM.render(React.createElement(App, { user: newUser }), document.getElementById('root'));
+          _this3.setState({ 'user': newUser });
+          ReactDOM.render(React.createElement(App, { user: _this3.state.user }), document.getElementById('root'));
         } else {
           console.log('Create user err');
         }

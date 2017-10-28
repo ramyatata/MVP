@@ -16,8 +16,7 @@ module.exports = function(sequelize, Sequelize){
       type: Sequelize.STRING
     },
     yelpId: {
-      type: Sequelize.STRING,
-      unique: true
+      type: Sequelize.STRING
     },
     yelpName: {
       type: Sequelize.STRING,

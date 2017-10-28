@@ -1,9 +1,9 @@
 class App extends React.Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      currentUser: 2,
+      currentUser: this.props.user.id,
       message_review: '',
       clear_review: false,
       restaurantsList: [],

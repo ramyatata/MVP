@@ -11,13 +11,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
 
-  function App() {
+  function App(props) {
     _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      currentUser: 2,
+      currentUser: _this.props.user.id,
       message_review: '',
       clear_review: false,
       restaurantsList: [],

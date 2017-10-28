@@ -30,8 +30,8 @@ const favourites = require('../models/favourites')(sequelize, Sequelize);
 //     password: 'ramya'
 //   });
 // });
- //restaurants.sync();
- //favourites.sync();
+ restaurants.sync();
+ favourites.sync();
 
 
 // friendsRelationship.sync()

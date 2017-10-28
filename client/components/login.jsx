@@ -3,7 +3,8 @@ class Login extends React.Component {
       super();
       this.state = {
         userName:'',
-        password:''
+        password:'',
+        user: {}
       };
 
       this.handleSignupClick = this.handleSignupClick.bind(this);
@@ -29,7 +30,10 @@ class Login extends React.Component {
             userName:'',
             password:''
           });
-          ReactDOM.render(<App user={newUser}/>, document.getElementById('root'));
+          this.setState({'user': newUser});
+          console.log('logged in user');
+          console.log(this.state.user);
+          ReactDOM.render(<App user={this.state.user}/>, document.getElementById('root'));
         } else {
           console.log('Login user err');
         }
@@ -38,7 +42,8 @@ class Login extends React.Component {
     callServiceCreateUser(values){
       services.users.create(values, (newUser, err) => {
         if(newUser) {
-          ReactDOM.render(<App user={newUser}/>, document.getElementById('root'));
+          this.setState({'user': newUser});
+          ReactDOM.render(<App user={this.state.user}/>, document.getElementById('root'));
         } else {
           console.log('Create user err');
         }

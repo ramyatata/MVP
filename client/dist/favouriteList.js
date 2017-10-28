@@ -17,7 +17,6 @@ var FavouriteList = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (FavouriteList.__proto__ || Object.getPrototypeOf(FavouriteList)).call(this, props));
 
         _this.state = {};
-
         return _this;
     }
 

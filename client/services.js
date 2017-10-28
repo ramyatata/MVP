@@ -138,7 +138,6 @@ window.services = {
       });
     },
     login: function(values, callback){
-      console.log('values : ' );
       console.log(values);
        $.ajax({
         url: 'http://localhost:8088/users/login',
