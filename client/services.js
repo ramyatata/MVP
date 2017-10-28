@@ -101,12 +101,27 @@ window.services = {
         type: 'POST',
         data: JSON.stringify(values),
         contentType: 'application/json',
-        dataType: 'application/json',
         success: function(results){
-          console.log(results, null);
+          callback(results, null);
         },
         failure: function(err, callback){
-          console.log(null, err);
+          callback(null, err);
+        }
+      });
+    },
+    login: function(values, callback){
+      console.log('values : ' );
+      console.log(values);
+       $.ajax({
+        url: 'http://localhost:8088/users/login',
+        type: 'POST',
+        data: JSON.stringify(values),
+        contentType: 'application/json',
+        success: function(results){
+          callback(results, null);
+        },
+        failure: function(err, callback){
+          callback(null, err);
         }
       });
     },

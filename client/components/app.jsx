@@ -14,7 +14,6 @@ class App extends React.Component {
     };
 
     this.callServiceListRestaurant = this.callServiceListRestaurant.bind(this);
-    this.callServiceAddUser = this.callServiceAddUser.bind(this);
     this.callServiceListUser = this.callServiceListUser.bind(this);
     this.callServiceGetUserFavourites = this.callServiceGetUserFavourites.bind(this);
     this.callServiceAddFavourite = this.callServiceAddFavourite.bind(this);
@@ -34,17 +33,6 @@ class App extends React.Component {
   }
 
   //Users
-  callServiceAddUser(values){
-    services.users.create(values, (newUser, err) => {
-      if(newUser){
-        this.setState({
-
-        });
-      } else {
-        this.setState('message_user': err.message);
-      }
-    });
-  }
   callServiceListUser(){
     var self = this;
     services.users.list(function(users, err){
@@ -57,6 +45,8 @@ class App extends React.Component {
       }
     });
   }
+
+  //Favourites
   callServiceGetUserFavourites(userId){
     services.favourites.get(userId, (favs, err) => {
       if(favs){
@@ -87,7 +77,7 @@ class App extends React.Component {
     });
   }
 
-  componentDidMount() {
+  componentDidMount(){
     this.callServiceListRestaurant();
     this.callServiceGetUserFavourites(2);
   }
@@ -96,23 +86,19 @@ class App extends React.Component {
     return (
       <div className='container'>
         <ul className='nav nav-tabs nav-justified'>
-          <li><a href='#review' data-toggle='tab'>Write Review</a></li>
+          <li className='active'><a href='#review' data-toggle='tab'>Write Review</a></li>
           <li><a href='#restaurant' data-toggle='tab'>Find Restaurant</a></li>
           <li><a href='#favourite' data-toggle='tab'>Favourites</a></li>
-          <li><a href='#login' data-toggle='tab'>Login</a></li>
         </ul>
         <div className='tab-content'>
-          <div className='tab-pane' id='review'>
+          <div className='tab-pane fade in active' id='review'>
             <ReviewContainer callServiceCreate={this.callServiceAddRestaurant} message={this.state.message} listRestaurants={this.callServiceListRestaurant}/>
           </div>
-          <div className='tab-pane' id='restaurant'>
+          <div className='tab-pane fade' id='restaurant'>
             <RestaurantPane restaurants={this.state.restaurantsList} addToFavourites={this.callServiceAddFavourite}/>
           </div>
-          <div className='tab-pane' id='favourite' >
+          <div className='tab-pane fade' id='favourite' >
             <FavouritePane favourites={this.state.favouritesList}/>
-          </div>
-          <div className='tab-pane' id='login'>
-             <Login/>
           </div>
         </div>
       </div>
@@ -121,7 +107,7 @@ class App extends React.Component {
 }
 
 //send userId for fav restuarants - TODO -- set currentUser in state
-ReactDOM.render(<App/>, document.getElementById('root'));
+
 
 window.App = App;
 

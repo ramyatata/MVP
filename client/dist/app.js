@@ -28,7 +28,6 @@ var App = function (_React$Component) {
     };
 
     _this.callServiceListRestaurant = _this.callServiceListRestaurant.bind(_this);
-    _this.callServiceAddUser = _this.callServiceAddUser.bind(_this);
     _this.callServiceListUser = _this.callServiceListUser.bind(_this);
     _this.callServiceGetUserFavourites = _this.callServiceGetUserFavourites.bind(_this);
     _this.callServiceAddFavourite = _this.callServiceAddFavourite.bind(_this);
@@ -55,19 +54,6 @@ var App = function (_React$Component) {
     //Users
 
   }, {
-    key: 'callServiceAddUser',
-    value: function callServiceAddUser(values) {
-      var _this2 = this;
-
-      services.users.create(values, function (newUser, err) {
-        if (newUser) {
-          _this2.setState({});
-        } else {
-          _this2.setState('message_user');
-        }
-      });
-    }
-  }, {
     key: 'callServiceListUser',
     value: function callServiceListUser() {
       var self = this;
@@ -79,23 +65,26 @@ var App = function (_React$Component) {
         }
       });
     }
+
+    //Favourites
+
   }, {
     key: 'callServiceGetUserFavourites',
     value: function callServiceGetUserFavourites(userId) {
-      var _this3 = this;
+      var _this2 = this;
 
       services.favourites.get(userId, function (favs, err) {
         if (favs) {
-          _this3.setState({ 'favouritesList': favs });
+          _this2.setState({ 'favouritesList': favs });
         } else {
-          _this3.setState('message_fav');
+          _this2.setState('message_fav');
         }
       });
     }
   }, {
     key: 'callServiceAddFavourite',
     value: function callServiceAddFavourite(restaurantId) {
-      var _this4 = this;
+      var _this3 = this;
 
       var userId = this.state.currentUser;
       var values = {
@@ -104,15 +93,15 @@ var App = function (_React$Component) {
       };
       services.favourites.create(values, function (newFav, err) {
         if (newFav) {
-          _this4.callServiceGetUserFavourites(userId);
+          _this3.callServiceGetUserFavourites(userId);
 
-          var filteredList = _this4.state.restaurantsList.filter(function (restaurant) {
+          var filteredList = _this3.state.restaurantsList.filter(function (restaurant) {
             return restaurant.id !== restaurantId;
           });
 
-          _this4.setState({ restaurantsList: filteredList });
+          _this3.setState({ restaurantsList: filteredList });
         } else {
-          _this4.setState('message_fav');
+          _this3.setState('message_fav');
         }
       });
     }
@@ -133,7 +122,7 @@ var App = function (_React$Component) {
           { className: 'nav nav-tabs nav-justified' },
           React.createElement(
             'li',
-            null,
+            { className: 'active' },
             React.createElement(
               'a',
               { href: '#review', 'data-toggle': 'tab' },
@@ -157,15 +146,6 @@ var App = function (_React$Component) {
               { href: '#favourite', 'data-toggle': 'tab' },
               'Favourites'
             )
-          ),
-          React.createElement(
-            'li',
-            null,
-            React.createElement(
-              'a',
-              { href: '#login', 'data-toggle': 'tab' },
-              'Login'
-            )
           )
         ),
         React.createElement(
@@ -173,23 +153,18 @@ var App = function (_React$Component) {
           { className: 'tab-content' },
           React.createElement(
             'div',
-            { className: 'tab-pane', id: 'review' },
+            { className: 'tab-pane fade in active', id: 'review' },
             React.createElement(ReviewContainer, { callServiceCreate: this.callServiceAddRestaurant, message: this.state.message, listRestaurants: this.callServiceListRestaurant })
           ),
           React.createElement(
             'div',
-            { className: 'tab-pane', id: 'restaurant' },
+            { className: 'tab-pane fade', id: 'restaurant' },
             React.createElement(RestaurantPane, { restaurants: this.state.restaurantsList, addToFavourites: this.callServiceAddFavourite })
           ),
           React.createElement(
             'div',
-            { className: 'tab-pane', id: 'favourite' },
+            { className: 'tab-pane fade', id: 'favourite' },
             React.createElement(FavouritePane, { favourites: this.state.favouritesList })
-          ),
-          React.createElement(
-            'div',
-            { className: 'tab-pane', id: 'login' },
-            React.createElement(Login, null)
           )
         )
       );
@@ -201,7 +176,5 @@ var App = function (_React$Component) {
 
 //send userId for fav restuarants - TODO -- set currentUser in state
 
-
-ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
 
 window.App = App;

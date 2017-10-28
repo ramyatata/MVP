@@ -81,4 +81,18 @@ router.delete('/:id', (req, res) => {
   })
 });
 
+//create
+router.post('/login', (req, res) => {
+  const body = req.body;
+
+  db.users.find({where:{'userName': req.body.userName, 'password':req.body.password}})
+  .then((user) => {
+    res.status(201);
+    res.json(user);
+  })
+  .catch((err) => {
+    throw err;
+  })
+});
+
 module.exports = router;
