@@ -17,6 +17,7 @@ class App extends React.Component {
     this.callServiceListUser = this.callServiceListUser.bind(this);
     this.callServiceGetUserFavourites = this.callServiceGetUserFavourites.bind(this);
     this.callServiceAddFavourite = this.callServiceAddFavourite.bind(this);
+    this.callServiceFilterRestaurants = this.callServiceFilterRestaurants.bind(this);
   }
   //Restaurant
   callServiceListRestaurant(){
@@ -76,18 +77,36 @@ class App extends React.Component {
       }
     });
   }
+  callServiceFilterRestaurants(){
+    alert('clickec');
+    var favouritesId = this.state.favouritesList.map((item)=>item.id);
+    var filteredList = this.state.restaurantsList.filter((item)=>{
+      var index = favouritesId.indexOf(item.id);
+      if(index === -1){
+        return true;
+      }
+      return false;
+    });
+    alert(filteredList.length);
+    this.setState({'restaurantsList': filteredList});
+  }
 
   componentDidMount(){
+    this.callServiceGetUserFavourites(this.callServiceGetUserFavourites(2));
     this.callServiceListRestaurant();
-    this.callServiceGetUserFavourites(2);
   }
 
   render() {
+    const titleStyle={
+      width: '10px'
+    };
+
     return (
       <div className='container'>
+      <div></div>
         <ul className='nav nav-tabs nav-justified'>
-          <li className='active'><a href='#review' data-toggle='tab'>Write Review</a></li>
-          <li><a href='#restaurant' data-toggle='tab'>Find Restaurant</a></li>
+          <li className='active'><a href='#review' data-toggle='tab'>Rate & Review</a></li>
+          <li onClick={this.callServiceFilterRestaurants}><a href='#restaurant' data-toggle='tab'>Pick Restaurants</a></li>
           <li><a href='#favourite' data-toggle='tab'>Favourites</a></li>
         </ul>
         <div className='tab-content'>

@@ -7,7 +7,6 @@ class RestaurantList extends React.Component {
     render() {
         var divStyle = {
             display: 'block',
-            padding: '40px',
             margin: 'auto'
         };
         var entries = this.props.data.map((item, ind) => <RestaurantEntry data={item} key={ind} addToFavourites={this.props.addToFavourites}/>);

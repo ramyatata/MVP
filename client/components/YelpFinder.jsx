@@ -26,18 +26,21 @@ class YelpFinder extends React.Component {
   }
 
   render() {
+    const searchStyle = {
+      marginLeft: '-30px'
+    };
     return (
       <div className='col-xs-12'>
       <form>
-      <div className='col-xs-9'>
+      <div className='col-xs-9' style={searchStyle}>
           <div className='col-xs-5'>
             <input className='form-control' name='term' type='text' value={this.state.term} onChange={this.handleInputChange} placeholder='Find Restaurant ...'/>
           </div>
           <div className='col-xs-5'>
-          <input className='form-control' name='location' type='text' value={this.state.location} onChange={this.handleInputChange} placeholder='Location..'/>
+          <input className='form-control' name='location' type='text' value={this.state.location} onChange={this.handleInputChange} placeholder='City ...'/>
           </div>
           <div className='col-xs-2'>
-          <button type='button' className='form-control btn btn-warning' onClick={this.handleSearch}>Search</button>
+          <button type='button' className='form-control btn btn-success' onClick={this.handleSearch}>Search</button>
           </div>
         </div>
         <div className='col-xs-9 text-center'>

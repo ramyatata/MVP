@@ -27,7 +27,6 @@ var RestaurantList = function (_React$Component) {
 
             var divStyle = {
                 display: 'block',
-                padding: '40px',
                 margin: 'auto'
             };
             var entries = this.props.data.map(function (item, ind) {

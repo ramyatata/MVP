@@ -25,7 +25,6 @@ var FavouriteList = function (_React$Component) {
         value: function render() {
             var divStyle = {
                 display: 'block',
-                padding: '40px',
                 margin: 'auto'
             };
             var entries = this.props.data.map(function (item, ind) {

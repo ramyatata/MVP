@@ -31,6 +31,7 @@ var App = function (_React$Component) {
     _this.callServiceListUser = _this.callServiceListUser.bind(_this);
     _this.callServiceGetUserFavourites = _this.callServiceGetUserFavourites.bind(_this);
     _this.callServiceAddFavourite = _this.callServiceAddFavourite.bind(_this);
+    _this.callServiceFilterRestaurants = _this.callServiceFilterRestaurants.bind(_this);
     return _this;
   }
   //Restaurant
@@ -106,17 +107,39 @@ var App = function (_React$Component) {
       });
     }
   }, {
+    key: 'callServiceFilterRestaurants',
+    value: function callServiceFilterRestaurants() {
+      alert('clickec');
+      var favouritesId = this.state.favouritesList.map(function (item) {
+        return item.id;
+      });
+      var filteredList = this.state.restaurantsList.filter(function (item) {
+        var index = favouritesId.indexOf(item.id);
+        if (index === -1) {
+          return true;
+        }
+        return false;
+      });
+      alert(filteredList.length);
+      this.setState({ 'restaurantsList': filteredList });
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.callServiceGetUserFavourites(this.callServiceGetUserFavourites(2));
       this.callServiceListRestaurant();
-      this.callServiceGetUserFavourites(2);
     }
   }, {
     key: 'render',
     value: function render() {
+      var titleStyle = {
+        width: '10px'
+      };
+
       return React.createElement(
         'div',
         { className: 'container' },
+        React.createElement('div', null),
         React.createElement(
           'ul',
           { className: 'nav nav-tabs nav-justified' },
@@ -126,16 +149,16 @@ var App = function (_React$Component) {
             React.createElement(
               'a',
               { href: '#review', 'data-toggle': 'tab' },
-              'Write Review'
+              'Rate & Review'
             )
           ),
           React.createElement(
             'li',
-            null,
+            { onClick: this.callServiceFilterRestaurants },
             React.createElement(
               'a',
               { href: '#restaurant', 'data-toggle': 'tab' },
-              'Find Restaurant'
+              'Pick Restaurants'
             )
           ),
           React.createElement(

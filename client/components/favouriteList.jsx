@@ -7,7 +7,6 @@ class FavouriteList extends React.Component {
     render() {
         var divStyle = {
             display: 'block',
-            padding: '40px',
             margin: 'auto'
         };
         var entries = this.props.data.map((item, ind) => <FavouriteEntry data={item.restaurant} key={ind} />);

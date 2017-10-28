@@ -4,9 +4,12 @@ class FavouritePane extends React.Component{
     this.state = {};
   }
   render() {
+    const headerStyle = {
+      marginLeft: '30px'
+    };
     return(
       <div>
-        <h2>Favourites</h2>
+        <h3 style={headerStyle}>My Favourites</h3>
         <FavouriteList data={this.props.favourites}/>
       </div>
     )

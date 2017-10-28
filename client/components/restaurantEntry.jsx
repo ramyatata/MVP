@@ -62,7 +62,7 @@ class RestaurantEntry extends React.Component {
         };
         var reviewStyle = {
             paddingRight: '5px',
-            color: '#eea236',
+            color: 'darkorchid',
             display: 'block',
             fontFamily: 'ClanPro-News, Helvetica, sans-serif',
             lineHeight: '15px',
@@ -111,7 +111,7 @@ class RestaurantEntry extends React.Component {
                     </div>
                     <br/>
                     <div>
-                            <button style={favBtn} className='btn btn-warning' onClick={this.addToFavouritesHandler}>Favourite This</button>
+                            <button style={favBtn} className='btn btn-success' onClick={this.addToFavouritesHandler}><span className='glyphicon glyphicon-heart'></span>&nbsp;&nbsp;Favourite</button>
                         </div>
                         </div>
                 </div>

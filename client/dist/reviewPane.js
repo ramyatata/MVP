@@ -109,26 +109,6 @@ var ReviewContainer = function (_React$Component) {
       });
     }
   }, {
-    key: 'callServiceAddRestaurant',
-    value: function callServiceAddRestaurant(resData) {
-      alert('in');
-
-      console.log(resData);
-
-      //
-      //console.log(JSON.stringify(restaurantData));
-      // services.restaurants.create(values, function(newRestaurant, err){
-      //   if(newRestaurant){
-      //     // this.setState({
-      //     //   'message_review': 'Restaurant is added',
-      //     //   'clear_review' : true
-      //     // });
-      //   } else {
-      //     // this.setState('message_review': err.message);
-      //   }
-      // });
-    }
-  }, {
     key: 'callServiceFetchYelpData',
     value: function callServiceFetchYelpData(searchCriteria) {
       var _this3 = this;
@@ -179,13 +159,17 @@ var ReviewContainer = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var headerStyle = {
+        marginLeft: '15px'
+      };
+
       return React.createElement(
         'div',
         null,
         React.createElement(
-          'h2',
-          null,
-          'Review Restaurant'
+          'h3',
+          { style: headerStyle },
+          'Rate & Review Restaurant'
         ),
         React.createElement(YelpFinder, { search: this.callServiceFetchYelpData, message: this.props.message_review }),
         React.createElement(YelpList, { data: this.state.yelpList, addReview: this.callServiceAddReview })

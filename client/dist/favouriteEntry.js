@@ -74,7 +74,7 @@ var FavouriteEntry = function (_React$Component) {
       };
       var reviewStyle = {
         paddingRight: '5px',
-        color: '#eea236',
+        color: 'darkorchid',
         display: 'block',
         fontFamily: 'ClanPro-News, Helvetica, sans-serif',
         lineHeight: '15px',
@@ -210,8 +210,8 @@ var FavouriteEntry = function (_React$Component) {
               null,
               React.createElement(
                 'button',
-                { style: favBtn, className: 'btn btn-warning' },
-                'Favourite This'
+                { style: favBtn, className: 'btn btn-success' },
+                'Favourites'
               )
             )
           )

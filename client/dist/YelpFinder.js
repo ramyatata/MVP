@@ -46,6 +46,9 @@ var YelpFinder = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var searchStyle = {
+        marginLeft: '-30px'
+      };
       return React.createElement(
         'div',
         { className: 'col-xs-12' },
@@ -54,7 +57,7 @@ var YelpFinder = function (_React$Component) {
           null,
           React.createElement(
             'div',
-            { className: 'col-xs-9' },
+            { className: 'col-xs-9', style: searchStyle },
             React.createElement(
               'div',
               { className: 'col-xs-5' },
@@ -63,14 +66,14 @@ var YelpFinder = function (_React$Component) {
             React.createElement(
               'div',
               { className: 'col-xs-5' },
-              React.createElement('input', { className: 'form-control', name: 'location', type: 'text', value: this.state.location, onChange: this.handleInputChange, placeholder: 'Location..' })
+              React.createElement('input', { className: 'form-control', name: 'location', type: 'text', value: this.state.location, onChange: this.handleInputChange, placeholder: 'City ...' })
             ),
             React.createElement(
               'div',
               { className: 'col-xs-2' },
               React.createElement(
                 'button',
-                { type: 'button', className: 'form-control btn btn-warning', onClick: this.handleSearch },
+                { type: 'button', className: 'form-control btn btn-success', onClick: this.handleSearch },
                 'Search'
               )
             )

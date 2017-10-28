@@ -58,7 +58,7 @@ class FavouriteEntry extends React.Component {
     };
     var reviewStyle = {
       paddingRight: '5px',
-      color: '#eea236',
+      color: 'darkorchid',
       display: 'block',
       fontFamily: 'ClanPro-News, Helvetica, sans-serif',
       lineHeight: '15px',
@@ -104,7 +104,7 @@ class FavouriteEntry extends React.Component {
             </div>
             <br/>
             <div>
-              <button style={favBtn} className='btn btn-warning'>Favourite This</button>
+              <button style={favBtn} className='btn btn-success'>Favourites</button>
             </div>
           </div>
         </div>

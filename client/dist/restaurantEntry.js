@@ -81,7 +81,7 @@ var RestaurantEntry = function (_React$Component) {
             };
             var reviewStyle = {
                 paddingRight: '5px',
-                color: '#eea236',
+                color: 'darkorchid',
                 display: 'block',
                 fontFamily: 'ClanPro-News, Helvetica, sans-serif',
                 lineHeight: '15px',
@@ -217,8 +217,9 @@ var RestaurantEntry = function (_React$Component) {
                             null,
                             React.createElement(
                                 'button',
-                                { style: favBtn, className: 'btn btn-warning', onClick: this.addToFavouritesHandler },
-                                'Favourite This'
+                                { style: favBtn, className: 'btn btn-success', onClick: this.addToFavouritesHandler },
+                                React.createElement('span', { className: 'glyphicon glyphicon-heart' }),
+                                '\xA0\xA0Favourite'
                             )
                         )
                     )

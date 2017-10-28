@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -21,15 +21,18 @@ var RestaurantPane = function (_React$Component) {
   }
 
   _createClass(RestaurantPane, [{
-    key: "render",
+    key: 'render',
     value: function render() {
+      var headerStyle = {
+        marginLeft: '30px'
+      };
       return React.createElement(
-        "div",
+        'div',
         null,
         React.createElement(
-          "h2",
-          null,
-          "List of restaurant"
+          'h3',
+          { style: headerStyle },
+          'Pick Restaurants'
         ),
         React.createElement(RestaurantList, { data: this.props.restaurants, addToFavourites: this.props.addToFavourites })
       );

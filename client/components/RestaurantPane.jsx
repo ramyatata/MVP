@@ -4,9 +4,12 @@ class RestaurantPane extends React.Component{
     this.state = {};
   }
   render() {
+    const headerStyle = {
+      marginLeft: '30px'
+    };
     return(
       <div>
-        <h2>List of restaurant</h2>
+        <h3 style={headerStyle}>Pick Restaurants</h3>
         <RestaurantList data={this.props.restaurants} addToFavourites={this.props.addToFavourites}/>
       </div>
     )
