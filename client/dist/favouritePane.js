@@ -34,7 +34,7 @@ var FavouritePane = function (_React$Component) {
           { style: headerStyle },
           'My Favourites'
         ),
-        React.createElement(FavouriteList, { data: this.props.favourites })
+        React.createElement(FavouriteList, { data: this.props.favourites, 'delete': this.props.delete, update: this.props.update })
       );
     }
   }]);

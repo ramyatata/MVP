@@ -17,10 +17,26 @@ var FavouriteEntry = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (FavouriteEntry.__proto__ || Object.getPrototypeOf(FavouriteEntry)).call(this, props));
 
     _this.state = {};
+
+    _this.deleteFavouriteHandler = _this.deleteFavouriteHandler.bind(_this);
+    _this.updateFavouriteHandler = _this.updateFavouriteHandler.bind(_this);
     return _this;
   }
 
   _createClass(FavouriteEntry, [{
+    key: 'deleteFavouriteHandler',
+    value: function deleteFavouriteHandler() {
+      this.props.delete(this.props.data.id);
+    }
+  }, {
+    key: 'updateFavouriteHandler',
+    value: function updateFavouriteHandler() {
+      var updateValues = {
+        visited: true
+      };
+      this.props.update(this.props.data.id, updateValues);
+    }
+  }, {
     key: 'render',
     value: function render() {
 
@@ -29,7 +45,8 @@ var FavouriteEntry = function (_React$Component) {
         paddingTop: '5px',
         paddingBottom: '5px',
         paddingLeft: '5px',
-        border: '2px solid #E0E0E0'
+        border: '2px solid #E0E0E0',
+        backgroundColor: !!this.props.data.visited ? '#C0D9AF' : 'none'
       };
       var contentStyle = {
         padding: '5px 0px 5px 5px',
@@ -81,8 +98,29 @@ var FavouriteEntry = function (_React$Component) {
         fontSize: '14px'
       };
       var favBtn = {
-        marginBottom: '20px'
+        marginBottom: '20px',
+        width: '50px',
+        height: '50px',
+        borderRadius: '50%',
+        textAlign: 'center',
+        paddingLeft: '5px',
+        paddingTop: '-3px',
+        marginRight: '7px'
       };
+      var spanStyle = {
+        fontSize: '2.5em'
+      };
+
+      var visitButton = "";
+
+      if (!this.props.data.visited) {
+        visitButton = React.createElement(
+          'button',
+          { style: favBtn, className: 'btn btn-success',
+            onClick: this.updateFavouriteHandler },
+          React.createElement('span', { style: spanStyle, className: 'glyphicon  glyphicon-ok' })
+        );
+      }
 
       return React.createElement(
         'div',
@@ -96,7 +134,7 @@ var FavouriteEntry = function (_React$Component) {
             React.createElement(
               'div',
               { style: titleStyle },
-              this.props.data.yelpName
+              this.props.data.restaurant.yelpName
             ),
             React.createElement(
               'div',
@@ -104,32 +142,32 @@ var FavouriteEntry = function (_React$Component) {
               React.createElement(
                 'span',
                 null,
-                this.props.data.yelpAddress1,
+                this.props.data.restaurant.yelpAddress1,
                 ','
               ),
               React.createElement('br', null),
               React.createElement(
                 'span',
                 null,
-                this.props.data.yelpCity
+                this.props.data.restaurant.yelpCity
               ),
               '\xA0',
               React.createElement(
                 'span',
                 null,
-                this.props.data.yelpState
+                this.props.data.restaurant.yelpState
               ),
               '\xA0',
               React.createElement(
                 'span',
                 null,
-                this.props.data.yelpZipcode
+                this.props.data.restaurant.yelpZipcode
               ),
               React.createElement('br', null),
               React.createElement(
                 'span',
                 null,
-                this.props.data.yelpPhone
+                this.props.data.restaurant.yelpPhone
               )
             ),
             React.createElement('br', null),
@@ -143,14 +181,14 @@ var FavouriteEntry = function (_React$Component) {
                   'span',
                   null,
                   'Rating : ',
-                  this.props.data.userRating
+                  this.props.data.restaurant.userRating
                 )
               ),
               React.createElement(
                 'p',
                 null,
                 'Review: ',
-                this.props.data.userReview
+                this.props.data.restaurant.userReview
               )
             ),
             React.createElement('br', null)
@@ -166,21 +204,21 @@ var FavouriteEntry = function (_React$Component) {
                 'span',
                 null,
                 'Price: ',
-                this.props.data.yelpPrice
+                this.props.data.restaurant.yelpPrice
               ),
               React.createElement('br', null),
               React.createElement(
                 'span',
                 null,
                 'Cusine: ',
-                this.props.data.yelpCategory
+                this.props.data.restaurant.yelpCategory
               ),
               React.createElement('br', null),
               React.createElement(
                 'span',
                 null,
                 'Yelp Rating: ',
-                this.props.data.yelpRating
+                this.props.data.restaurant.yelpRating
               ),
               React.createElement('br', null)
             ),
@@ -191,9 +229,15 @@ var FavouriteEntry = function (_React$Component) {
                 'a',
                 { href: this.props.data.yelpUrl, target: '_blank' },
                 'Yelp Reviews (',
-                this.props.data.yelpReviewCount,
+                this.props.data.restaurant.yelpReviewCount,
                 ') ...'
               )
+            ),
+            React.createElement(
+              'div',
+              null,
+              'Visited: ',
+              React.createElement('input', { type: 'checkbox', checked: this.props.data.visited })
             )
           ),
           React.createElement(
@@ -202,7 +246,7 @@ var FavouriteEntry = function (_React$Component) {
             React.createElement(
               'div',
               { style: imageDivStyle },
-              React.createElement('img', { src: this.props.data.yelpImageUrl, alt: 'Mountain View', style: imageStyle })
+              React.createElement('img', { src: this.props.data.restaurant.yelpImageUrl, alt: 'Mountain View', style: imageStyle })
             ),
             React.createElement('br', null),
             React.createElement(
@@ -210,9 +254,10 @@ var FavouriteEntry = function (_React$Component) {
               null,
               React.createElement(
                 'button',
-                { style: favBtn, className: 'btn btn-success' },
-                'Favourites'
-              )
+                { style: favBtn, className: 'btn btn-success', onClick: this.deleteFavouriteHandler },
+                React.createElement('span', { style: spanStyle, className: 'glyphicon glyphicon-thumbs-down' })
+              ),
+              visitButton
             )
           )
         )

@@ -32,6 +32,8 @@ var App = function (_React$Component) {
     _this.callServiceGetUserFavourites = _this.callServiceGetUserFavourites.bind(_this);
     _this.callServiceAddFavourite = _this.callServiceAddFavourite.bind(_this);
     _this.callServiceFilterRestaurants = _this.callServiceFilterRestaurants.bind(_this);
+    _this.callServiceDeleteFavourite = _this.callServiceDeleteFavourite.bind(_this);
+    _this.callServiceUpdateFavorite = _this.callServiceUpdateFavorite.bind(_this);
     return _this;
   }
   //Restaurant
@@ -74,13 +76,15 @@ var App = function (_React$Component) {
     value: function callServiceGetUserFavourites(userId) {
       var _this2 = this;
 
-      services.favourites.get(userId, function (favs, err) {
-        if (favs) {
-          _this2.setState({ 'favouritesList': favs });
-        } else {
-          _this2.setState('message_fav');
-        }
-      });
+      if (userId) {
+        services.favourites.get(userId, function (favs, err) {
+          if (favs) {
+            _this2.setState({ 'favouritesList': favs });
+          } else {
+            _this2.setState('message_fav');
+          }
+        });
+      }
     }
   }, {
     key: 'callServiceAddFavourite',
@@ -109,9 +113,8 @@ var App = function (_React$Component) {
   }, {
     key: 'callServiceFilterRestaurants',
     value: function callServiceFilterRestaurants() {
-      alert('clickec');
       var favouritesId = this.state.favouritesList.map(function (item) {
-        return item.id;
+        return item.restaurantId;
       });
       var filteredList = this.state.restaurantsList.filter(function (item) {
         var index = favouritesId.indexOf(item.id);
@@ -120,13 +123,46 @@ var App = function (_React$Component) {
         }
         return false;
       });
-      alert(filteredList.length);
       this.setState({ 'restaurantsList': filteredList });
+    }
+  }, {
+    key: 'callServiceDeleteFavourite',
+    value: function callServiceDeleteFavourite(id) {
+      var _this4 = this;
+
+      services.favourites.delete(id, function (delFav, err) {
+        if (delFav) {
+          var filteredList = _this4.state.favouritesList.filter(function (item) {
+            return item.id !== id;
+          });
+
+          _this4.setState({ favouritesList: filteredList });
+          _this4.callServiceListRestaurant();
+          _this4.callServiceFilterRestaurants();
+        } else {
+          _this4.setState('message_fav');
+        }
+      });
+    }
+  }, {
+    key: 'callServiceUpdateFavorite',
+    value: function callServiceUpdateFavorite(id, values) {
+      var _this5 = this;
+
+      services.favourites.update(id, values, function (updatedFav, err) {
+        if (updatedFav) {
+          var userId = _this5.state.currentUser;
+          _this5.callServiceGetUserFavourites(userId);
+        } else {
+          _this5.setState('message_fav');
+        }
+      });
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.callServiceGetUserFavourites(this.callServiceGetUserFavourites(2));
+      var userId = this.state.currentUser;
+      this.callServiceGetUserFavourites(userId);
       this.callServiceListRestaurant();
     }
   }, {
@@ -187,7 +223,7 @@ var App = function (_React$Component) {
           React.createElement(
             'div',
             { className: 'tab-pane fade', id: 'favourite' },
-            React.createElement(FavouritePane, { favourites: this.state.favouritesList })
+            React.createElement(FavouritePane, { favourites: this.state.favouritesList, 'delete': this.callServiceDeleteFavourite, update: this.callServiceUpdateFavorite })
           )
         )
       );
@@ -196,8 +232,5 @@ var App = function (_React$Component) {
 
   return App;
 }(React.Component);
-
-//send userId for fav restuarants - TODO -- set currentUser in state
-
 
 window.App = App;

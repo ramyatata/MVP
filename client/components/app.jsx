@@ -18,6 +18,8 @@ class App extends React.Component {
     this.callServiceGetUserFavourites = this.callServiceGetUserFavourites.bind(this);
     this.callServiceAddFavourite = this.callServiceAddFavourite.bind(this);
     this.callServiceFilterRestaurants = this.callServiceFilterRestaurants.bind(this);
+    this.callServiceDeleteFavourite = this.callServiceDeleteFavourite.bind(this);
+    this.callServiceUpdateFavorite = this.callServiceUpdateFavorite.bind(this);
   }
   //Restaurant
   callServiceListRestaurant(){
@@ -49,13 +51,15 @@ class App extends React.Component {
 
   //Favourites
   callServiceGetUserFavourites(userId){
-    services.favourites.get(userId, (favs, err) => {
-      if(favs){
-        this.setState({'favouritesList': favs});
-      } else {
-        this.setState('message_fav': err.message);
-      }
-    });
+    if(userId){
+      services.favourites.get(userId, (favs, err) => {
+        if(favs){
+          this.setState({'favouritesList': favs});
+        } else {
+          this.setState('message_fav': err.message);
+        }
+      });
+    }
   }
   callServiceAddFavourite(restaurantId){
     const userId = this.state.currentUser;
@@ -78,8 +82,7 @@ class App extends React.Component {
     });
   }
   callServiceFilterRestaurants(){
-    alert('clickec');
-    var favouritesId = this.state.favouritesList.map((item)=>item.id);
+    var favouritesId = this.state.favouritesList.map((item)=>item.restaurantId);
     var filteredList = this.state.restaurantsList.filter((item)=>{
       var index = favouritesId.indexOf(item.id);
       if(index === -1){
@@ -87,17 +90,42 @@ class App extends React.Component {
       }
       return false;
     });
-    alert(filteredList.length);
     this.setState({'restaurantsList': filteredList});
+  }
+  callServiceDeleteFavourite(id){
+    services.favourites.delete(id, (delFav, err) => {
+      if(delFav) {
+        const filteredList = this.state.favouritesList.filter((item) =>
+          item.id !== id
+        );
+
+        this.setState({favouritesList: filteredList});
+        this.callServiceListRestaurant();
+        this.callServiceFilterRestaurants();
+      } else {
+        this.setState('message_fav': err.message);
+      }
+    });
+  }
+  callServiceUpdateFavorite(id, values){
+    services.favourites.update(id, values, (updatedFav, err) => {
+      if(updatedFav) {
+        var userId = this.state.currentUser;
+        this.callServiceGetUserFavourites(userId);
+      } else {
+        this.setState('message_fav': err.message);
+      }
+    });
   }
 
   componentDidMount(){
-    this.callServiceGetUserFavourites(this.callServiceGetUserFavourites(2));
+    var userId = this.state.currentUser;
+    this.callServiceGetUserFavourites(userId);
     this.callServiceListRestaurant();
   }
 
   render() {
-    const titleStyle={
+    const titleStyle = {
       width: '10px'
     };
 
@@ -117,16 +145,13 @@ class App extends React.Component {
             <RestaurantPane restaurants={this.state.restaurantsList} addToFavourites={this.callServiceAddFavourite}/>
           </div>
           <div className='tab-pane fade' id='favourite' >
-            <FavouritePane favourites={this.state.favouritesList}/>
+            <FavouritePane favourites={this.state.favouritesList} delete={this.callServiceDeleteFavourite} update={this.callServiceUpdateFavorite}/>
           </div>
         </div>
       </div>
     );
   }
 }
-
-//send userId for fav restuarants - TODO -- set currentUser in state
-
 
 window.App = App;
 

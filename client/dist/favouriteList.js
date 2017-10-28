@@ -17,18 +17,21 @@ var FavouriteList = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (FavouriteList.__proto__ || Object.getPrototypeOf(FavouriteList)).call(this, props));
 
         _this.state = {};
+
         return _this;
     }
 
     _createClass(FavouriteList, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var divStyle = {
                 display: 'block',
                 margin: 'auto'
             };
             var entries = this.props.data.map(function (item, ind) {
-                return React.createElement(FavouriteEntry, { data: item.restaurant, key: ind });
+                return React.createElement(FavouriteEntry, { data: item, key: ind, 'delete': _this2.props.delete, update: _this2.props.update });
             });
 
             return React.createElement(

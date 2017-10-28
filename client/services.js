@@ -77,10 +77,9 @@ window.services = {
         }
       });
     },
-    get: function(userId, callback){
-        console.log('2');
+    get: function(id, callback){
         $.ajax({
-        url: 'http://localhost:8088/favourites/' + userId,
+        url: 'http://localhost:8088/favourites/' + id,
         type: 'GET',
         contentType: 'application/json',
         success: function(results){
@@ -90,6 +89,35 @@ window.services = {
         error: function(err){
           console.log('failed fav list');
           callback(err);
+        }
+      });
+    },
+    delete: function(id, callback){
+      $.ajax({
+        url: 'http://localhost:8088/favourites/' + id,
+        type: 'DELETE',
+        contentType: 'application/json',
+        success: function(results){
+          console.log('success fav delete');
+          callback(results);
+        },
+        error: function(err){
+          console.log('failed fav delete');
+          callback(err);
+        }
+      });
+    },
+    update: function(id, values, callback) {
+      $.ajax({
+        url: 'http://localhost:8088/favourites/' + id,
+        type: 'PUT',
+        data: JSON.stringify(values),
+        contentType: 'application/json',
+        success: function(results){
+          callback(results, null);
+        },
+        failure: function(err, callback) {
+          callback(null, err);
         }
       });
     }
